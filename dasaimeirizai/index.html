@@ -1,0 +1,1110 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>大赛每日在线爆料平台-赛事线报与评审动态追踪</title>
+<meta name="description" content="大赛每日在线爆料平台汇总设计、编程、短视频等赛事的每日线报：报名节点、评审进度、入围名单变化与选手问答，提供爆料核验方法与赛程对照，帮助参赛者判断信息真假与准备节奏。">
+<meta name="keywords" content="大赛每日在线爆料平台">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2313202e'/%3E%3Cpath d='M14 40l10-14 8 10 6-8 12 16z' fill='%23ffb547'/%3E%3Ccircle cx='44' cy='20' r='6' fill='%234fc3c3'/%3E%3C/svg%3E">
+<style>
+:root{
+  --ink:#13202e;
+  --ink-2:#2b3b4d;
+  --muted:#5f7185;
+  --line:#dfe5ec;
+  --bg:#f5f7fa;
+  --card:#ffffff;
+  --brand:#124b6e;
+  --brand-deep:#0b3350;
+  --accent:#c8761a;
+  --accent-soft:#fdf1e1;
+  --teal:#1f7a78;
+  --teal-soft:#e6f3f2;
+  --danger:#a63d2f;
+  --radius:14px;
+  --radius-sm:8px;
+  --shadow:0 2px 10px rgba(19,32,46,.07);
+  --shadow-lift:0 6px 18px rgba(19,32,46,.10);
+  --space:clamp(16px,2.2vw,28px);
+  --font:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --announce-h:38px;
+  --header-h:62px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;font-family:var(--font);color:var(--ink);background:var(--bg);
+  line-height:1.75;font-size:16px;-webkit-text-size-adjust:100%;
+}
+img{max-width:100%;display:block}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:4px}
+h1,h2,h3,h4{line-height:1.35;margin:0}
+h2{font-size:clamp(21px,2.4vw,26px)}
+h3{font-size:clamp(17px,1.8vw,19px)}
+p{margin:.65em 0}
+ul,ol{margin:.6em 0;padding-left:1.25em}
+li{margin:.3em 0}
+section[id],div[id="top"]{scroll-margin-top:calc(var(--announce-h) + var(--header-h) + 12px)}
+
+/* ---------- 公告条 + 页头 ---------- */
+.sticky-stack{position:sticky;top:0;z-index:60}
+.announce{
+  background:var(--brand-deep);color:#eaf2f7;font-size:13.5px;
+  min-height:var(--announce-h);display:flex;align-items:center;gap:10px;
+  padding:6px 0;
+}
+.announce .wrap{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.announce .tag{
+  background:var(--accent);color:#fff;font-weight:700;font-size:12px;
+  padding:2px 8px;border-radius:999px;letter-spacing:.5px;flex:none;
+}
+.announce b{color:#ffd79a;font-weight:600}
+.announce a{color:#d9ecf7;text-decoration:underline;text-underline-offset:3px}
+.announce a:hover{color:#fff}
+
+.site-header{
+  background:rgba(255,255,255,.96);backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);box-shadow:0 1px 0 rgba(19,32,46,.03);
+}
+.wrap{width:min(1180px,100% - 2*var(--space));margin-inline:auto}
+.header-inner{display:flex;align-items:center;gap:18px;min-height:var(--header-h);flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;flex:none;color:var(--ink)}
+.brand:hover{text-decoration:none}
+.brand-mark{width:38px;height:38px;flex:none}
+.brand-text{display:flex;flex-direction:column;line-height:1.2}
+.brand-name{font-weight:800;font-size:17px;letter-spacing:.3px;color:var(--brand-deep)}
+.brand-sub{font-size:11px;color:var(--muted);letter-spacing:.6px}
+.main-nav{margin-left:auto;display:flex;align-items:center;gap:2px;flex-wrap:wrap}
+.main-nav a{
+  font-size:14.5px;color:var(--ink-2);padding:7px 10px;border-radius:var(--radius-sm);
+  white-space:nowrap;
+}
+.main-nav a:hover{background:var(--teal-soft);text-decoration:none;color:var(--brand-deep)}
+.main-nav a.active{background:var(--brand);color:#fff}
+.header-tools{display:flex;align-items:center;gap:8px}
+.search-box{display:flex;align-items:center;border:1px solid var(--line);border-radius:999px;background:#fff;padding:3px 4px 3px 12px;gap:4px}
+.search-box input{border:0;outline:none;font:inherit;font-size:13.5px;width:132px;background:transparent;color:var(--ink)}
+.search-box button{
+  border:0;background:var(--brand);color:#fff;font:inherit;font-size:13px;font-weight:600;
+  padding:5px 12px;border-radius:999px;cursor:pointer;
+}
+.search-box button:hover{background:var(--brand-deep)}
+.menu-toggle{
+  display:none;border:1px solid var(--line);background:#fff;color:var(--brand-deep);
+  font:inherit;font-size:13.5px;font-weight:600;padding:7px 12px;border-radius:var(--radius-sm);cursor:pointer;
+}
+.search-msg{font-size:13px;color:var(--muted);padding:6px 0 0;width:100%}
+.search-msg strong{color:var(--danger)}
+
+/* ---------- 首屏 ---------- */
+.hero{
+  background:
+    radial-gradient(1200px 380px at 82% -10%, rgba(31,122,120,.16), transparent 60%),
+    linear-gradient(160deg,#0f3b58 0%,#124b6e 52%,#175f7f 100%);
+  color:#e9f3f8;position:relative;overflow:hidden;
+}
+.hero .wrap{position:relative;padding:clamp(30px,4.4vw,54px) 0 clamp(26px,3.6vw,46px);display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(20px,3vw,44px);align-items:center}
+.hero-kicker{
+  display:inline-flex;align-items:center;gap:8px;font-size:13px;letter-spacing:1.2px;
+  color:#9fd6d2;border:1px solid rgba(159,214,210,.45);border-radius:999px;padding:3px 12px;
+}
+.hero h1{
+  font-size:clamp(26px,3.9vw,40px);margin:14px 0 10px;letter-spacing:.5px;color:#fff;
+}
+.hero-lead{font-size:15.5px;color:#c7dde9;max-width:46ch;margin:0 0 18px}
+.hero-actions{display:flex;gap:10px;flex-wrap:wrap}
+.btn{
+  display:inline-block;font-size:14.5px;font-weight:700;padding:9px 18px;border-radius:999px;
+  border:1px solid transparent;transition:transform .15s ease, background .15s ease;
+}
+.btn:hover{text-decoration:none;transform:translateY(-2px)}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{background:#d98a2b}
+.btn-ghost{border-color:rgba(255,255,255,.4);color:#e9f3f8;background:rgba(255,255,255,.06)}
+.btn-ghost:hover{background:rgba(255,255,255,.14)}
+.hero-stats{display:flex;gap:26px;margin-top:24px;flex-wrap:wrap}
+.hero-stats dt{font-size:12px;color:#9fbccd;letter-spacing:.6px;margin-bottom:2px}
+.hero-stats dd{margin:0;font-size:22px;font-weight:800;color:#fff;font-variant-numeric:tabular-nums}
+.hero-stats dd small{font-size:12px;font-weight:500;color:#9fbccd;margin-left:4px}
+.hero-art{position:relative;min-height:236px}
+.hero-art svg{width:100%;height:auto;display:block;filter:drop-shadow(0 10px 22px rgba(0,0,0,.25))}
+.hero-note{
+  position:absolute;left:4%;bottom:2%;background:rgba(9,32,49,.9);border:1px solid rgba(159,214,210,.4);
+  border-radius:10px;padding:8px 12px;font-size:12.5px;color:#c9e2ee;line-height:1.55;max-width:250px;
+}
+
+/* ---------- 主内容网格 ---------- */
+.page-grid{
+  display:grid;grid-template-columns:minmax(0,1fr) 292px;gap:clamp(18px,2.6vw,34px);
+  padding:clamp(22px,3vw,38px) 0 40px;align-items:start;
+}
+main{min-width:0}
+.aside{min-width:0;display:flex;flex-direction:column;gap:18px}
+
+.card{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:clamp(16px,2vw,24px);
+}
+.card + .card{margin-top:20px}
+.sec-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.sec-head h2{color:var(--brand-deep)}
+.sec-sub{font-size:13px;color:var(--muted)}
+.sec-tag{
+  font-size:11.5px;font-weight:700;letter-spacing:.8px;color:var(--teal);
+  background:var(--teal-soft);border-radius:4px;padding:2px 7px;
+}
+.lead-p{font-size:14.5px;color:var(--ink-2)}
+.small{font-size:13px;color:var(--muted)}
+.tag-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{
+  display:inline-block;font-size:13px;padding:4px 11px;border-radius:999px;
+  background:var(--bg);border:1px solid var(--line);color:var(--ink-2);
+}
+.chip:hover{background:var(--teal-soft);border-color:#bfdedc;color:var(--brand-deep);text-decoration:none}
+
+/* 概览指标 */
+.fact-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:6px}
+.fact{border-left:3px solid var(--teal);background:var(--bg);border-radius:0 var(--radius-sm) var(--radius-sm) 0;padding:10px 12px}
+.fact b{display:block;font-size:19px;color:var(--brand-deep);font-variant-numeric:tabular-nums}
+.fact span{font-size:12.5px;color:var(--muted)}
+
+/* 精选卡片网格 */
+.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.fcard{
+  border:1px solid var(--line);border-radius:var(--radius-sm);overflow:hidden;background:#fff;
+  display:flex;flex-direction:column;transition:transform .15s ease, box-shadow .15s ease;
+}
+.fcard:hover{transform:translateY(-3px);box-shadow:var(--shadow-lift)}
+.fcard img{width:100%;height:118px;object-fit:cover}
+.fcard-body{padding:10px 12px 12px;display:flex;flex-direction:column;gap:5px;flex:1}
+.fcard h3{font-size:15px;color:var(--brand-deep)}
+.fcard p{margin:0;font-size:13px;color:var(--muted)}
+.fcard .meta{font-size:12px;color:var(--accent);font-weight:600;margin-top:auto}
+
+/* 紧凑列表 */
+.tight-list{list-style:none;padding:0;margin:0}
+.tight-list li{
+  display:grid;grid-template-columns:64px 1fr auto;gap:12px;align-items:baseline;
+  padding:9px 0;border-bottom:1px dashed var(--line);font-size:14px;
+}
+.tight-list li:last-child{border-bottom:0}
+.tight-list time{font-size:12.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+.tight-list .badge{font-size:11.5px;padding:1px 7px;border-radius:4px;background:var(--accent-soft);color:#8a5210;font-weight:700;white-space:nowrap}
+.tight-list .badge.t{background:var(--teal-soft);color:#155e5c}
+.tight-list .badge.r{background:#fbe9e6;color:var(--danger)}
+
+/* 分类入口 */
+.cat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.cat{
+  display:block;border:1px solid var(--line);border-radius:var(--radius-sm);padding:11px 13px;
+  background:#fff;color:var(--ink-2);
+}
+.cat:hover{border-color:var(--brand);background:#fbfdfe;text-decoration:none}
+.cat b{display:block;color:var(--brand-deep);font-size:14.5px}
+.cat span{font-size:12.5px;color:var(--muted)}
+
+/* 深度解析 */
+.analysis{border-left:4px solid var(--accent);background:#fffdf9}
+.analysis h2{color:var(--brand-deep)}
+.analysis h3{margin-top:20px;color:var(--brand);border-left:3px solid var(--teal);padding-left:9px}
+.analysis p{font-size:15px;color:var(--ink-2)}
+.datatable{width:100%;border-collapse:collapse;font-size:13.5px;margin:12px 0}
+.datatable caption{text-align:left;font-size:12.5px;color:var(--muted);padding-bottom:5px}
+.datatable th,.datatable td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}
+.datatable thead th{background:var(--bg);color:var(--brand-deep);font-size:13px}
+.datatable tbody tr:nth-child(even){background:#fafcfd}
+
+/* 编号步骤 */
+.steps{list-style:none;counter-reset:step;padding:0;margin:8px 0 0}
+.steps li{
+  counter-increment:step;position:relative;padding:0 0 16px 44px;font-size:14.5px;color:var(--ink-2);
+}
+.steps li::before{
+  content:counter(step);position:absolute;left:0;top:0;
+  width:28px;height:28px;border-radius:50%;background:var(--brand);color:#fff;
+  font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;
+}
+.steps li::after{content:"";position:absolute;left:13.5px;top:30px;bottom:2px;width:1px;background:var(--line)}
+.steps li:last-child{padding-bottom:0}
+.steps li:last-child::after{display:none}
+.steps b{color:var(--brand-deep)}
+
+/* 对照面板 */
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line);border-radius:var(--radius-sm);overflow:hidden;margin-top:8px}
+.compare>div{padding:12px 14px}
+.compare>div:first-child{border-right:1px solid var(--line);background:#fbf7f2}
+.compare>div:last-child{background:var(--teal-soft)}
+.compare h4{font-size:14px;margin-bottom:6px;color:var(--brand-deep)}
+.compare ul{margin:0;padding-left:1.1em;font-size:13.5px;color:var(--ink-2)}
+.compare li{margin:.25em 0}
+
+/* FAQ */
+.faq-list{margin-top:4px}
+.faq-list details{border-bottom:1px solid var(--line);padding:4px 0}
+.faq-list details:last-child{border-bottom:0}
+.faq-list summary{
+  cursor:pointer;font-weight:600;font-size:15px;color:var(--brand-deep);
+  padding:9px 26px 9px 2px;position:relative;list-style:none;
+}
+.faq-list summary::-webkit-details-marker{display:none}
+.faq-list summary::after{
+  content:"+";position:absolute;right:4px;top:8px;font-size:19px;color:var(--accent);font-weight:700;
+}
+.faq-list details[open] summary::after{content:"−"}
+.faq-list .ans{font-size:14px;color:var(--ink-2);padding:0 2px 10px}
+.faq-list .ans p{margin:.3em 0}
+
+/* 评论 */
+.comments{display:flex;flex-direction:column;gap:12px;margin-top:6px}
+.comment{border:1px solid var(--line);border-radius:var(--radius-sm);padding:11px 14px;background:#fbfcfd}
+.comment .who{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;font-size:12.5px;color:var(--muted)}
+.comment .who b{color:var(--brand-deep);font-size:13.5px}
+.comment p{margin:.35em 0 0;font-size:14px;color:var(--ink-2)}
+.comment .verdict{font-size:12px;color:var(--teal);font-weight:700}
+.comment .verdict.warn{color:var(--danger)}
+
+/* 资讯 */
+.news-list{list-style:none;padding:0;margin:0}
+.news-list li{padding:10px 0;border-bottom:1px dashed var(--line)}
+.news-list li:last-child{border-bottom:0}
+.news-list b{font-size:14.5px;color:var(--brand-deep);font-weight:700}
+.news-list p{margin:.2em 0;font-size:13.5px;color:var(--muted)}
+
+/* 时间线 */
+.timeline{list-style:none;padding:0;margin:8px 0 0;border-left:2px solid var(--teal);padding-left:18px}
+.timeline li{position:relative;padding-bottom:14px}
+.timeline li::before{
+  content:"";position:absolute;left:-25px;top:6px;width:10px;height:10px;border-radius:50%;
+  background:#fff;border:2px solid var(--teal);
+}
+.timeline li:last-child{padding-bottom:0}
+.timeline time{font-size:12.5px;color:var(--accent);font-weight:700;display:block}
+.timeline span{font-size:13.5px;color:var(--ink-2)}
+
+/* 引语卡 */
+.quote-card{
+  background:linear-gradient(135deg,#0f3b58,#175f7f);color:#e9f3f8;border-radius:var(--radius);
+  padding:18px 20px;margin-top:16px;position:relative;
+}
+.quote-card::before{content:"“";position:absolute;left:12px;top:-6px;font-size:52px;color:rgba(255,183,71,.5);font-family:Georgia,serif}
+.quote-card p{margin:0;font-size:14.5px;line-height:1.8;padding-left:20px}
+.quote-card footer{margin-top:8px;font-size:12.5px;color:#a8c8d8;text-align:right}
+
+/* 侧栏 */
+.side-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px 16px 18px}
+.side-card h3{font-size:15px;color:var(--brand-deep);margin-bottom:8px;display:flex;align-items:center;gap:7px}
+.side-card h3::before{content:"";width:3px;height:15px;background:var(--accent);border-radius:2px;display:inline-block}
+.side-nav{list-style:none;padding:0;margin:0;font-size:14px}
+.side-nav a{display:block;padding:6px 9px;border-radius:6px;color:var(--ink-2);border-left:2px solid transparent}
+.side-nav a:hover{background:var(--bg);text-decoration:none}
+.side-nav a.active{background:var(--teal-soft);border-left-color:var(--teal);color:var(--brand-deep);font-weight:700}
+.rank-list{list-style:none;padding:0;margin:0;counter-reset:rank}
+.rank-list li{counter-increment:rank;display:flex;gap:10px;align-items:baseline;padding:7px 0;border-bottom:1px dashed var(--line);font-size:13.5px}
+.rank-list li:last-child{border-bottom:0}
+.rank-list li::before{
+  content:counter(rank);flex:none;width:20px;height:20px;border-radius:5px;background:var(--bg);
+  color:var(--muted);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;
+}
+.rank-list li:nth-child(-n+3)::before{background:var(--accent);color:#fff}
+.rank-list a{color:var(--ink-2)}
+.rank-list small{display:block;color:var(--muted);font-size:12px}
+
+/* 页脚 */
+.site-footer{background:var(--brand-deep);color:#c3d6e2;margin-top:10px;padding:clamp(26px,3.4vw,44px) 0 22px;font-size:13.5px}
+.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:24px}
+.site-footer h4{color:#fff;font-size:14.5px;margin-bottom:10px;letter-spacing:.5px}
+.site-footer a{color:#c3d6e2}
+.site-footer a:hover{color:#fff}
+.footer-brand{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.footer-brand .brand-name{color:#fff;font-size:16px}
+.footer-brand .brand-sub{color:#8fb2c6}
+.footer-brand svg{width:34px;height:34px;flex:none}
+.footer-links{list-style:none;padding:0;margin:0}
+.footer-links li{margin:.32em 0}
+.footer-bottom{
+  border-top:1px solid rgba(255,255,255,.15);margin-top:22px;padding-top:14px;
+  display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:12.5px;color:#8fb2c6;
+}
+
+/* 回到顶部 */
+.to-top{
+  position:fixed;right:18px;bottom:20px;z-index:70;width:44px;height:44px;border-radius:50%;
+  border:1px solid var(--line);background:#fff;color:var(--brand);font-size:18px;font-weight:700;
+  cursor:pointer;box-shadow:var(--shadow-lift);display:none;align-items:center;justify-content:center;
+}
+.to-top.show{display:flex}
+.to-top:hover{background:var(--teal-soft)}
+
+/* 响应式 */
+@media (max-width:1024px){
+  .page-grid{grid-template-columns:1fr}
+  .aside{order:2}
+  main{order:1}
+  .feature-grid{grid-template-columns:repeat(2,1fr)}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .hero .wrap{grid-template-columns:1fr}
+  .hero-art{max-width:520px}
+}
+@media (max-width:760px){
+  .header-inner{gap:8px}
+  .menu-toggle{display:inline-block;margin-left:auto}
+  .main-nav{display:none;width:100%;order:5;flex-direction:column;align-items:stretch;gap:2px;padding:8px 0 10px;border-top:1px solid var(--line)}
+  .main-nav.open{display:flex}
+  .main-nav a{padding:9px 10px}
+  .header-tools{order:4;width:100%;padding-bottom:10px}
+  .search-box{width:100%}
+  .search-box input{flex:1;width:auto}
+  .fact-grid{grid-template-columns:repeat(2,1fr)}
+  .feature-grid{grid-template-columns:1fr}
+  .cat-grid{grid-template-columns:1fr}
+  .compare{grid-template-columns:1fr}
+  .compare>div:first-child{border-right:0;border-bottom:1px solid var(--line)}
+  .tight-list li{grid-template-columns:56px 1fr;gap:8px}
+  .tight-list .badge{grid-column:2;justify-self:start}
+  .footer-grid{grid-template-columns:1fr}
+  .to-top{right:12px;bottom:14px;width:40px;height:40px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{transition:none!important;animation:none!important}
+  .fcard:hover,.btn:hover{transform:none}
+}
+</style>
+<script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+<div class="sticky-stack">
+  <div class="announce" role="region" aria-label="站内公告">
+    <div class="wrap">
+      <span class="tag">今日线报</span>
+      <span>11 月 8 日 09:20 更新：全国青少年编程挑战赛复赛名单由 240 人调整为 <b>236 人</b>，4 人因提交文件校验失败被移出，赛事方已发布更正说明。</span>
+      <a href="/#latest">查看更新条目</a>
+    </div>
+  </div>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="/#top" aria-label="返回首页">
+        <svg class="brand-mark" viewBox="0 0 64 64" role="img" aria-label="平台标志：雷达与奖杯轮廓">
+          <rect width="64" height="64" rx="14" fill="#0f3b58"/>
+          <path d="M12 42l11-16 8 11 6-8 11 15z" fill="#ffb547"/>
+          <circle cx="45" cy="20" r="6" fill="#4fc3c3"/>
+          <path d="M45 12v-3M45 31v-3M37 20h-3M56 20h-3" stroke="#9fd6d2" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <span class="brand-text">
+          <span class="brand-name">大赛每日在线爆料平台</span>
+          <span class="brand-sub">赛程 · 评审 · 入围 · 核验</span>
+        </span>
+      </a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mainNav" id="menuToggle">频道菜单</button>
+      <nav class="main-nav" id="mainNav" aria-label="主题导航">
+        <a href="/#overview">赛事概览</a>
+        <a href="/#featured">精选爆料</a>
+        <a href="/#latest">最新更新</a>
+        <a href="/#channels">分类入口</a>
+        <a href="/#analysis">深度解析</a>
+        <a href="/#guide">体验指南</a>
+        <a href="/#faq">常见问答</a>
+      </nav>
+      <div class="header-tools">
+        <div class="search-box" role="search">
+          <label for="siteSearch" class="small" style="position:absolute;left:-9999px">站内搜索</label>
+          <input id="siteSearch" type="search" placeholder="搜赛事名、节点、选手" autocomplete="off">
+          <button type="button" id="searchBtn">查找</button>
+        </div>
+      </div>
+      <p class="search-msg" id="searchMsg" hidden></p>
+    </div>
+  </header>
+</div>
+
+<div id="top"></div>
+
+<!-- 首屏 -->
+<section class="hero" aria-labelledby="heroTitle">
+  <div class="wrap">
+    <div>
+      <span class="hero-kicker">DAILY · 赛事线报 · 核验优先</span>
+      <h1 id="heroTitle">大赛每日在线爆料平台</h1>
+      <p class="hero-lead">把散在赛事官网、评审群截图和选手私信里的碎片，按时间、来源和可核验程度摆到一张桌上：谁改了名单，哪条公告被撤回，哪句“内部消息”其实只是转述。</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="/#latest">看今日 11 条更新</a>
+        <a class="btn btn-ghost" href="/#analysis">读评审进度解析</a>
+      </div>
+      <dl class="hero-stats">
+        <div><dt>跟踪赛事</dt><dd>27<small>项</small></dd></div>
+        <div><dt>今日新增线报</dt><dd>11<small>条</small></dd></div>
+        <div><dt>已核验条目</dt><dd>186<small>条</small></dd></div>
+        <div><dt>争议待定</dt><dd>4<small>条</small></dd></div>
+      </dl>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <svg viewBox="0 0 420 300" role="img">
+        <defs>
+          <linearGradient id="hg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#1c7f8c"/><stop offset="1" stop-color="#0f3b58"/>
+          </linearGradient>
+          <linearGradient id="hg2" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#ffb547"/><stop offset="1" stop-color="#e07f24"/>
+          </linearGradient>
+        </defs>
+        <rect x="18" y="30" width="290" height="196" rx="14" fill="url(#hg)" stroke="#4fc3c3" stroke-opacity=".5"/>
+        <line x1="38" y1="58" x2="288" y2="58" stroke="#9fd6d2" stroke-opacity=".5" stroke-width="2"/>
+        <circle cx="46" cy="46" r="4" fill="#ffb547"/>
+        <circle cx="60" cy="46" r="4" fill="#4fc3c3" opacity=".7"/>
+        <path d="M54 196 L104 142 L150 172 L196 118 L246 160 L276 128" fill="none" stroke="#ffb547" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+        <g fill="#cfe6ef" opacity=".85">
+          <rect x="54" y="80" width="118" height="9" rx="4"/>
+          <rect x="54" y="99" width="88" height="9" rx="4"/>
+          <rect x="54" y="118" width="140" height="9" rx="4"/>
+        </g>
+        <g transform="translate(300,120)">
+          <circle r="46" fill="#0b3350" stroke="#4fc3c3" stroke-width="2" stroke-opacity=".6"/>
+          <circle r="30" fill="none" stroke="#9fd6d2" stroke-opacity=".6" stroke-dasharray="4 5"/>
+          <path d="M0 0L28-28" stroke="#ffb547" stroke-width="3" stroke-linecap="round"/>
+          <circle r="5" fill="#ffb547"/>
+          <circle cx="-14" cy="10" r="3.5" fill="#4fc3c3"/>
+          <circle cx="16" cy="16" r="3" fill="#cfe6ef"/>
+        </g>
+        <rect x="248" y="34" width="120" height="30" rx="8" fill="url(#hg2)"/>
+        <text x="308" y="54" text-anchor="middle" font-size="14" font-weight="700" fill="#3b2508" font-family="inherit">线报核验中</text>
+      </svg>
+      <p class="hero-note">数据口径：覆盖 27 项公开赛事，线报按“官方公告 / 选手原话 / 群聊转述 / 推测”四层标注，每天 21:00 汇总一次。</p>
+    </div>
+  </div>
+</section>
+
+<div class="wrap page-grid">
+<!-- 主内容 -->
+<main>
+  <!-- 领域概览 -->
+  <section class="card" id="overview" aria-labelledby="ovTitle">
+    <div class="sec-head">
+      <h2 id="ovTitle">赛事线报都跟什么</h2>
+      <span class="sec-tag">领域概览</span>
+      <span class="sec-sub">截至 11 月 8 日 09:20</span>
+    </div>
+    <p class="lead-p">11 月是秋季赛事的密集收口期：报名截止、初赛评审、复赛名单、现场决赛集中在 20 天里。设计类看作品提交与版权声明，编程类看评测机判题与查重，短视频类看流量与内容合规，三类赛事最容易出现“名单变更”和“评审进度延迟”。</p>
+    <div class="fact-grid">
+      <div class="fact"><b>27</b><span>在跟赛事，含 9 项高校赛</span></div>
+      <div class="fact"><b>236</b><span>编程挑战赛复赛实际人数</span></div>
+      <div class="fact"><b>3</b><span>本周发布更正公告的赛事</span></div>
+      <div class="fact"><b>48h</b><span>名单变更平均公示时长</span></div>
+    </div>
+    <p>从 10 月 20 日算起，平台记录到 14 次名单调整、7 次评审时间顺延、3 次评分标准修订。变更集中在两类节点：初赛提交截止后 72 小时，以及复赛答辩前 5 天。前者多与文件校验、重复提交有关，后者多与评委档期和现场设备有关。</p>
+    <div class="tag-row" aria-label="概览相关关键词">
+      <a class="chip" href="/#channels">设计大赛作品提交截止</a>
+      <a class="chip" href="/#channels">编程挑战赛评测机判题</a>
+      <a class="chip" href="/#channels">短视频大赛流量分</a>
+      <a class="chip" href="/#channels">高校赛事复赛名单</a>
+      <a class="chip" href="/#channels">赛事评委查重规则</a>
+    </div>
+  </section>
+
+  <!-- 精选内容推荐 -->
+  <section class="card" id="featured" aria-labelledby="ftTitle">
+    <div class="sec-head">
+      <h2 id="ftTitle">本周精选爆料</h2>
+      <span class="sec-tag">编辑挑选</span>
+      <span class="sec-sub">6 条，均有原始出处</span>
+    </div>
+    <div class="feature-grid">
+      <article class="fcard">
+        <img src="https://picsum.photos/seed/saishi-guocheng/480/300" width="480" height="300" loading="lazy" alt="编程挑战赛评测机机房内的服务器机柜与屏幕">
+        <div class="fcard-body">
+          <h3>编程挑战赛评测机扩容</h3>
+          <p>11 月 6 日 22:40，官方在选手群说明评测节点由 8 台增至 12 台，复赛提交截止相应延长 36 小时。</p>
+          <span class="meta">来源：赛事公告 · 已核验</span>
+        </div>
+      </article>
+      <article class="fcard">
+        <img src="https://picsum.photos/seed/sheji-pingmian/480/300" width="480" height="300" loading="lazy" alt="平面设计作品展板与色卡摆在长桌上">
+        <div class="fcard-body">
+          <h3>平面设计赛评分表外流</h3>
+          <p>一份标注“评审用”的五维评分表在三个选手群流传，赛事方回应称系草案，权重尚未定稿。</p>
+          <span class="meta">来源：选手原话 · 待核验</span>
+        </div>
+      </article>
+      <article class="fcard">
+        <img src="https://picsum.photos/seed/duanshipin-jianji/480/300" width="480" height="300" loading="lazy" alt="短视频剪辑工作台双屏显示时间线与素材库">
+        <div class="fcard-body">
+          <h3>短视频赛流量分算法调整</h3>
+          <p>11 月 4 日发布的补充规则把“完播率”权重从 30% 降到 22%，新增“互动深度”指标。</p>
+          <span class="meta">来源：官方补充公告 · 已核验</span>
+        </div>
+      </article>
+      <article class="fcard">
+        <img src="https://picsum.photos/seed/robotics-changkuang/480/300" width="480" height="300" loading="lazy" alt="机器人竞赛场地与维修工具工作台">
+        <div class="fcard-body">
+          <h3>机器人赛现场维修时间收紧</h3>
+          <p>华东赛区通知把两轮之间的维修窗口由 20 分钟压到 12 分钟，队伍需提前提交备件清单。</p>
+          <span class="meta">来源：赛区通知 · 已核验</span>
+        </div>
+      </article>
+      <article class="fcard">
+        <img src="https://picsum.photos/seed/lunwen-chachong/480/300" width="480" height="300" loading="lazy" alt="论文查重报告打印件与笔电屏幕对照">
+        <img src="https://picsum.photos/seed/chuangye-luyan/480/300" width="480" height="300" loading="lazy" alt="路演现场投影屏幕与评审席桌牌">
+        <div class="fcard-body">
+          <h3>创业赛路演顺序重排</h3>
+          <p>因两名评委航班延误，11 月 7 日的 16 组路演被拆成上午 10 组、下午 6 组，抽签结果作废重抽。</p>
+          <span class="meta">来源：组委会邮件 · 已核验</span>
+        </div>
+      </article>
+      <article class="fcard">
+        <img src="https://picsum.photos/seed/huawen-pingshen/480/300" width="480" height="300" loading="lazy" alt="命题创作评审现场手写评分表">
+        <div class="fcard-body">
+          <h3>命题创作赛加设“原创性面谈”</h3>
+          <p>入围前 60 名需参加 15 分钟视频面谈，说明创作草图与素材来源，未参加视为放弃。</p>
+          <span class="meta">来源：官方公告 · 已核验</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- 最新更新 -->
+  <section class="card" id="latest" aria-labelledby="ltTitle">
+    <div class="sec-head">
+      <h2 id="ltTitle">最新更新</h2>
+      <span class="sec-tag">按时间倒序</span>
+      <span class="sec-sub">11 月 8 日 09:20 汇总</span>
+    </div>
+    <ul class="tight-list">
+      <li>
+        <time datetime="2026-11-08">今天 09:20</time>
+        <span>编程挑战赛复赛名单由 240 人更正为 236 人，4 份提交因 ZIP 内文件名含空格导致校验失败。</span>
+        <span class="badge">官方更正</span>
+      </li>
+      <li>
+        <time datetime="2026-11-08">今天 08:05</time>
+        <span>平面设计赛初评结束，评委组把“版式”单项分从 20 分调到 25 分，总分仍为 100 分。</span>
+        <span class="badge t">评分修订</span>
+      </li>
+      <li>
+        <time datetime="2026-11-07">昨天 21:10</time>
+        <span>短视频赛 12 强中两名选手因素材授权说明缺失被要求 48 小时内补交，暂不公布名次。</span>
+        <span class="badge r">待定</span>
+      </li>
+      <li>
+        <time datetime="2026-11-07">昨天 16:30</time>
+        <span>机器人赛华东赛区公布场地尺寸图，第二轮任务区宽度由 1.8 米改为 2.1 米。</span>
+        <span class="badge">赛区通知</span>
+      </li>
+      <li>
+        <time datetime="2026-11-06">11 月 6 日</time>
+        <span>编程挑战赛评测节点由 8 台增至 12 台，复赛提交截止延长至 11 月 10 日 23:59。</span>
+        <span class="badge t">规则变更</span>
+      </li>
+      <li>
+        <time datetime="2026-11-06">11 月 6 日</time>
+        <span>创业赛路演顺序重排，原定 B 组第 3 位的“青禾睡眠”改到上午第 9 位。</span>
+        <span class="badge">流程调整</span>
+      </li>
+      <li>
+        <time datetime="2026-11-05">11 月 5 日</time>
+        <span>命题创作赛加设 15 分钟原创性面谈，入围 60 人名单同步公布于赛事官网。</span>
+        <span class="badge t">新增环节</span>
+      </li>
+      <li>
+        <time datetime="2026-11-04">11 月 4 日</time>
+        <span>短视频赛补充规则：完播率权重 30%→22%，新增互动深度指标占 10%。</span>
+        <span class="badge">规则变更</span>
+      </li>
+      <li>
+        <time datetime="2026-11-03">11 月 3 日</time>
+        <span>高校电子设计赛公布元件清单，禁用两款停产的稳压芯片，可用替代型号已列出。</span>
+        <span class="badge">清单更新</span>
+      </li>
+      <li>
+        <time datetime="2026-11-02">11 月 2 日</time>
+        <span>平面设计赛收到 1,847 份作品，重复提交 63 份，以最后一次上传版本为准。</span>
+        <span class="badge t">提交统计</span>
+      </li>
+      <li>
+        <time datetime="2026-11-01">11 月 1 日</time>
+        <span>数据分析赛开放测试集下载，文件大小 486MB，校验码 SHA-256 同步公布。</span>
+        <span class="badge">数据发布</span>
+      </li>
+    </ul>
+  </section>
+
+  <!-- 分类入口 -->
+  <section class="card" id="channels" aria-labelledby="chTitle">
+    <div class="sec-head">
+      <h2 id="chTitle">按赛事类型找线报</h2>
+      <span class="sec-tag">10 个频道</span>
+      <span class="sec-sub">点击进入对应条目组</span>
+    </div>
+    <div class="cat-grid">
+      <a class="cat" href="/#latest"><b>编程挑战赛评测与查重</b><span>判题机反馈、代码相似度阈值、重测申请</span></a>
+      <a class="cat" href="/#latest"><b>平面设计赛作品提交与版权</b><span>文件规格、原创声明、重复提交处理</span></a>
+      <a class="cat" href="/#latest"><b>短视频大赛流量分与合规</b><span>完播率权重、BGM 授权、内容审核</span></a>
+      <a class="cat" href="/#latest"><b>高校电子设计赛元件清单</b><span>停产型号、替代料、现场发放规则</span></a>
+      <a class="cat" href="/#latest"><b>机器人赛现场维修与备件</b><span>维修窗口、备件申报、场地尺寸变化</span></a>
+      <a class="cat" href="/#latest"><b>创业计划赛路演与答辩</b><span>抽签顺序、路演时长、评委提问范围</span></a>
+      <a class="cat" href="/#latest"><b>命题创作赛原创性面谈</b><span>面谈流程、草图说明、素材来源</span></a>
+      <a class="cat" href="/#latest"><b>数据分析赛测试集与校验码</b><span>数据集版本、提交格式、排行榜刷新</span></a>
+      <a class="cat" href="/#latest"><b>数学建模赛论文查重</b><span>查重工具、重复率红线、申诉材料</span></a>
+      <a class="cat" href="/#latest"><b>公益创新赛评审进度</b><span>初评时间、入围比例、公示期</span></a>
+    </div>
+  </section>
+
+  <!-- 深度解析 -->
+  <section class="card analysis" id="analysis" aria-labelledby="anTitle">
+    <div class="sec-head">
+      <h2 id="anTitle">复赛名单为什么总在截止后变</h2>
+      <span class="sec-tag">深度解析</span>
+    </div>
+    <p>判断先摆出来：秋季赛事里，名单变更的主因是提交环节的技术校验，评委改分的占比反而小。按平台 10 月 20 日至 11 月 8 日记录的 14 次调整，9 次与文件、账号、重复提交有关，3 次与评分口径有关，2 次与选手资格材料有关。</p>
+
+    <h3>一、时间线：一次 4 人被移出的完整链条</h3>
+    <p>11 月 5 日 18:00，编程挑战赛提交截止，系统显示收到 1,312 份作品。11 月 6 日 10:15，组委会在选手群贴出“复赛 240 人”初步名单。11 月 7 日 15:40，4 名选手收到邮件，称其 ZIP 包内含空格文件名，解压校验失败，需在 24 小时内重传。11 月 8 日 09:20，名单更正为 236 人，4 人被移出，另有 4 名候补进入。</p>
+    <table class="datatable">
+      <caption>编程挑战赛名单调整对照（2026 年 11 月）</caption>
+      <thead>
+        <tr><th>时间</th><th>动作</th><th>涉及人数</th><th>可核对依据</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>11-06 10:15</td><td>公布初步复赛名单</td><td>240 人</td><td>选手群截图 + 官网名单页</td></tr>
+        <tr><td>11-07 15:40</td><td>邮件通知补传</td><td>4 人</td><td>邮件截图（主题含“校验失败”）</td></tr>
+        <tr><td>11-08 09:20</td><td>名单更正</td><td>236 人</td><td>官网更正公告第 3 版</td></tr>
+        <tr><td>11-08 09:20</td><td>候补补入</td><td>4 人</td><td>官网名单页第 236—239 行</td></tr>
+      </tbody>
+    </table>
+    <p>这条链里没有“暗箱”证据。真正值得追问的是：初评阶段为什么没做解压预检。赛事方在更正公告里承认，预检脚本只校验了单文件大小，没有测试批量解压，这是可以复现的技术疏漏。</p>
+
+    <h3>二、数据对比：评分改动与流程改动的比例</h3>
+    <p>把 14 次调整按性质拆开：文件与账号类 9 次，评委改分 3 次，资格材料 2 次。3 次改分里，最大幅度是平面设计赛“版式”单项从 20 分调到 25 分，其余两次各调 2 分和 3 分。评分调整会改变排名，但通常只在 5 到 12 个名次内浮动；文件校验失败则直接出局，影响更硬。</p>
+    <div class="compare">
+      <div>
+        <h4>技术校验类变更</h4>
+        <ul>
+          <li>发生 9 次，占 64%</li>
+          <li>结果：出局或补入，不可申诉</li>
+          <li>典型原因：文件名空格、压缩包加密、账号重复</li>
+          <li>可预防：提交前本地解压一次</li>
+        </ul>
+      </div>
+      <div>
+        <h4>评分口径类变更</h4>
+        <ul>
+          <li>发生 3 次，占 21%</li>
+          <li>结果：名次浮动，可书面申诉</li>
+          <li>典型原因：单项权重调整、评委合议分歧</li>
+          <li>可预防：关注补充公告与评审细则版本号</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>三、说法差异：三份公告里的三个措辞</h3>
+    <p>11 月 6 日公告写“因系统负载，提交截止延长 36 小时”；11 月 7 日群消息写“个别选手文件异常，正在核查”；11 月 8 日更正公告写“预检脚本未覆盖批量解压场景”。三句话不矛盾，但责任落点从“系统负载”移到“脚本缺陷”。选手群里流传的“评委临时砍人”说法，目前没有任何公告或邮件支持，按现有材料只能归为推测。</p>
+    <p>短视频赛的情况相反。11 月 4 日补充规则把完播率权重从 30% 降到 22%，官方解释是“避免标题党”，但 11 月 7 日两名选手被要求补交素材授权，说明审核重点同时在收紧。两件事同周发生，容易被读成“针对某类内容”，实际一个改算法权重，一个补授权材料，处理对象不同。</p>
+
+    <h3>四、把判断拆成可核对项</h3>
+    <p>遇到名单变动，按下面四项逐条打勾，比看群聊情绪可靠：</p>
+    <ol>
+      <li>有没有官网公告编号与版本号（如“第 3 版”）？</li>
+      <li>受影响人数是否与前后名单行数差一致？</li>
+      <li>通知渠道是邮件、短信还是群消息？群消息单独出现时先当转述。</li>
+      <li>是否给出补交或申诉窗口，窗口多长？</li>
+    </ol>
+    <p>四项里缺两项以上，先别转发。11 月 7 日那条“机器人赛取消现场赛”的消息，四项只满足一项，后经赛区确认是误传，原话来自一名志愿者的个人猜测。</p>
+  </section>
+
+  <!-- 体验指南 -->
+  <section class="card" id="guide" aria-labelledby="gdTitle">
+    <div class="sec-head">
+      <h2 id="gdTitle">参赛者怎么用线报做决定</h2>
+      <span class="sec-tag">体验指南</span>
+    </div>
+    <p>线报的价值不在“早知道”，在“少做错”。下面五步按一天的节奏排，适合同时跟两项以上赛事的选手。</p>
+    <ol class="steps">
+      <li><b>早上看公告版本号。</b>同一赛事公告若出现“第 2 版”“更正”，先读差异段，再看名单。11 月 8 日编程赛更正公告的差异只有两段，却决定 8 个人去留。</li>
+      <li><b>提交前本地解压一次。</b>把压缩包在另一台电脑解压，确认文件名无空格、无中文标点、无加密。编程赛 4 人出局就是这个环节。</li>
+      <li><b>把评审细则存成 PDF。</b>评分权重调整时，旧版本能帮你判断改动幅度。平面设计赛版式单项从 20 到 25 分，就是对比两版细则看出来的。</li>
+      <li><b>群消息只当线索。</b>看到“内部消息”先找三个东西：公告编号、通知渠道、受影响名单。三样缺两样，放一放。</li>
+      <li><b>申诉窗口当天处理。</b>多数赛事给 24 到 48 小时，邮件标题写清赛事名、参赛号、问题类型，正文附截图，别只写“求复核”。</li>
+    </ol>
+  </section>
+
+  <!-- FAQ -->
+  <section class="card" id="faq" aria-labelledby="fqTitle">
+    <div class="sec-head">
+      <h2 id="fqTitle">常见问答</h2>
+      <span class="sec-tag">FAQ</span>
+    </div>
+    <div class="faq-list">
+      <details>
+        <summary>复赛名单公布后还会改吗？</summary>
+        <div class="ans"><p>会，但改动通常有痕迹。按 10 月 20 日以来的记录，名单调整都会配一份带版本号的更正公告，并给受影响选手单独发邮件。若只看到群消息说“名单要变”，没有公告编号，先按转述处理。</p></div>
+      </details>
+      <details>
+        <summary>评测机判题结果和本地不一致怎么办？</summary>
+        <div class="ans"><p>先核对编译参数与内存限制。编程挑战赛 11 月 6 日把评测节点从 8 台增到 12 台，环境版本未变，但部分选手本地用了更高版本的编译器。提交页会显示评测机语言版本号，对照后再决定是否申请重测。</p></div>
+      </details>
+      <details>
+        <summary>短视频赛完播率权重下调会影响已发布作品吗？</summary>
+        <div class="ans"><p>影响按新规则重算的榜单。11 月 4 日补充规则把完播率从 30% 降到 22%，新增互动深度 10%。已发布作品不回炉，但 11 月 5 日之后的数据按新权重计。历史数据仍可查，只是不再决定名次。</p></div>
+      </details>
+      <details>
+        <summary>作品被指重复提交，以哪个版本为准？</summary>
+        <div class="ans"><p>平面设计赛明确以最后一次成功上传的版本为准，11 月 2 日统计的 63 份重复提交按此处理。若最后一次上传在截止后，系统会拒收，此时以截止前最后一次为准，需保留上传回执截图。</p></div>
+      </details>
+      <details>
+        <summary>原创性面谈没参加会怎样？</summary>
+        <div class="ans"><p>命题创作赛把未参加面谈视为放弃入围资格。面谈 15 分钟，重点问草图来源、素材授权和修改过程，不考现场创作。11 月 5 日公告列出 60 人名单与面谈时段，改期需提前 24 小时申请。</p></div>
+      </details>
+      <details>
+        <summary>评审进度延迟算不算赛事方违约？</summary>
+        <div class="ans"><p>看赛事章程有没有写死公布日期。机器人赛华东赛区把维修窗口从 20 分钟压到 12 分钟，属于现场规则调整，赛前已通知；但评审结果晚于章程写明的日期，选手可依据章程条款书面询问，目前 3 项赛事有此情况。</p></div>
+      </details>
+      <details>
+        <summary>哪里能看到评分细则的旧版本？</summary>
+        <div class="ans"><p>赛事官网“文件下载”区通常保留历史版本，文件名带日期。平面设计赛的评分表草案在 11 月 6 日被外传，官方回应称权重未定稿，最终版以 11 月 8 日发布的第 2 版细则为准。</p></div>
+      </details>
+    </div>
+  </section>
+
+  <!-- 用户评论 -->
+  <section class="card" id="comments" aria-labelledby="cmTitle">
+    <div class="sec-head">
+      <h2 id="cmTitle">选手与教练怎么说</h2>
+      <span class="sec-tag">用户评论</span>
+      <span class="sec-sub">含中性及批评意见</span>
+    </div>
+    <div class="comments">
+      <article class="comment">
+        <div class="who"><b>程一舟</b><span>编程赛复赛选手</span><span class="verdict">指向具体条目</span></div>
+        <p>ZIP 文件名带空格这事我踩过。11 月 7 日 15:40 收到邮件，重传后 11 月 8 日看到自己在 236 人名单里，但候补补入的 4 人里有一个我认识，他初赛排名比我低 11 位，规则上说得通，心里还是别扭。</p>
+      </article>
+      <article class="comment">
+        <div class="who"><b>林菀</b><span>平面设计赛参赛者</span><span class="verdict">指向具体条目</span></div>
+        <p>版式从 20 分调到 25 分，对我是利好，我的强项就在版式。但 11 月 8 日才发第 2 版细则，初评已经结束，这个时间点让人怀疑是不是为了照顾某几份作品。</p>
+      </article>
+      <article class="comment">
+        <div class="who"><b>老周</b><span>机器人赛带队教练</span><span class="verdict warn">中性吐槽</span></div>
+        <p>维修窗口 12 分钟，拆一颗螺丝都不够。场地宽度从 1.8 米改到 2.1 米，路线要重排，通知只提前 5 天。赛区说“已考虑”，考虑在哪没写。</p>
+      </article>
+      <article class="comment">
+        <div class="who"><b>阿棠</b><span>短视频赛 12 强选手</span><span class="verdict">指向具体条目</span></div>
+        <p>完播率降到 22% 我理解，标题党确实多。可 11 月 7 日让我补 BGM 授权，截止给 48 小时，我那段音乐是平台曲库里的，授权说明要自己找，流程有点绕。</p>
+      </article>
+      <article class="comment">
+        <div class="who"><b>许明远</b><span>高校电子设计赛指导教师</span><span class="verdict">指向具体条目</span></div>
+        <p>禁用两款停产稳压芯片是合理的，替代型号列了三种，其中一种交期 6 周，11 月 3 日才说，来不及。清单更新能不能提前到报名阶段。</p>
+      </article>
+      <article class="comment">
+        <div class="who"><b>匿名</b><span>数据分析赛参赛者</span><span class="verdict warn">批评意见</span></div>
+        <p>测试集 486MB，校验码给了，但下载链接 11 月 1 日晚上挂了两次。排行榜刷新慢半天，不知道是数据大还是人少。</p>
+      </article>
+    </div>
+    <div class="quote-card">
+      <p>名单变更不可怕，可怕的是变更没有版本号。有编号、有人数、有窗口，选手就能自己算清楚；三样都没有，只能靠猜。</p>
+      <footer>—— 赛事观察员 沈其 在 11 月 8 日线报会上的发言</footer>
+    </div>
+  </section>
+
+  <!-- 相关资讯 -->
+  <section class="card" id="news" aria-labelledby="nwTitle">
+    <div class="sec-head">
+      <h2 id="nwTitle">相关资讯</h2>
+      <span class="sec-tag">外部动态</span>
+    </div>
+    <ul class="news-list">
+      <li>
+        <b>中国大学生计算机设计大赛发布 2027 年赛制预告</b>
+        <p>11 月 6 日官网挂出征求意见稿，拟把校赛推荐名额与省赛获奖率挂钩，正式文件待 12 月发布。</p>
+      </li>
+      <li>
+        <b>全国青少年编程挑战赛新增“代码可读性”评分项</b>
+        <p>11 月 5 日评审细则第 4 版增加 5 分可读性项，要求提交 README 与函数注释，未提交按 0 分计。</p>
+      </li>
+      <li>
+        <b>短视频大赛平台方公布 BGM 授权白名单</b>
+        <p>11 月 4 日列出 1,240 首可商用曲目，白名单外音乐需上传授权凭证，审核约 3 个工作日。</p>
+      </li>
+      <li>
+        <b>机器人赛华北赛区更换比赛场地</b>
+        <p>11 月 3 日通知由原体育馆移至会展中心 B 馆，地胶摩擦系数不同，建议队伍提前一天试跑。</p>
+      </li>
+      <li>
+        <b>数学建模赛查重系统升级至 2.3 版</b>
+        <p>11 月 2 日公告称新版本增加公式相似度比对，重复率红线仍为 25%，申诉材料需附查重报告原件。</p>
+      </li>
+    </ul>
+  </section>
+
+  <!-- 相关推荐 -->
+  <section class="card" id="related" aria-labelledby="rlTitle">
+    <div class="sec-head">
+      <h2 id="rlTitle">相关推荐</h2>
+      <span class="sec-tag">标签索引</span>
+    </div>
+    <div class="tag-row">
+      <a class="chip" href="/#analysis">复赛名单更正公告怎么看</a>
+      <a class="chip" href="/#guide">提交前文件校验清单</a>
+      <a class="chip" href="/#latest">评测机语言版本对照</a>
+      <a class="chip" href="/#faq">短视频赛完播率权重变化</a>
+      <a class="chip" href="/#latest">机器人赛备件申报流程</a>
+      <a class="chip" href="/#comments">选手申诉邮件怎么写</a>
+      <a class="chip" href="/#analysis">评分细则版本号追踪</a>
+      <a class="chip" href="/#latest">论文查重报告原件要求</a>
+      <a class="chip" href="/#guide">路演顺序重排应对</a>
+      <a class="chip" href="/#faq">原创性面谈准备材料</a>
+    </div>
+  </section>
+
+  <!-- 补充板块：时间线 -->
+  <section class="card" id="timeline" aria-labelledby="tlTitle">
+    <div class="sec-head">
+      <h2 id="tlTitle">11 月赛事节点时间线</h2>
+      <span class="sec-tag">节点对照</span>
+    </div>
+    <ul class="timeline">
+      <li><time datetime="2026-11-10">11 月 10 日 23:59</time><span>编程挑战赛复赛提交截止（延长后）</span></li>
+      <li><time datetime="2026-11-11">11 月 11 日</time><span>平面设计赛第 2 版细则申诉截止，仅接受邮件</span></li>
+      <li><time datetime="2026-11-12">11 月 12 日 14:00</time><span>命题创作赛原创性面谈开始，60 人分 4 组</span></li>
+      <li><time datetime="2026-11-14">11 月 14 日</time><span>短视频赛 12 强素材授权补交截止</span></li>
+      <li><time datetime="2026-11-15">11 月 15 日</time><span>机器人赛华东赛区现场赛，维修窗口 12 分钟</span></li>
+      <li><time datetime="2026-11-18">11 月 18 日</time><span>创业计划赛决赛路演，16 组按重抽顺序出场</span></li>
+    </ul>
+  </section>
+</main>
+
+<!-- 侧栏 -->
+<aside class="aside" aria-label="侧栏">
+  <nav class="side-card" aria-labelledby="sideNavTitle">
+    <h3 id="sideNavTitle">栏目导航</h3>
+    <ul class="side-nav" id="sideNav">
+      <li><a href="/#overview">赛事概览</a></li>
+      <li><a href="/#featured">精选爆料</a></li>
+      <li><a href="/#latest">最新更新</a></li>
+      <li><a href="/#channels">分类入口</a></li>
+      <li><a href="/#analysis">深度解析</a></li>
+      <li><a href="/#guide">体验指南</a></li>
+      <li><a href="/#faq">常见问答</a></li>
+      <li><a href="/#comments">用户评论</a></li>
+      <li><a href="/#news">相关资讯</a></li>
+      <li><a href="/#timeline">节点时间线</a></li>
+    </ul>
+  </nav>
+  <section class="side-card" aria-labelledby="rankTitle">
+    <h3 id="rankTitle">本周热度榜</h3>
+    <ol class="rank-list">
+      <li><a href="/#latest">编程赛名单更正<small>236 人 · 4 出 4 进</small></a></li>
+      <li><a href="/#featured">平面赛评分表外流<small>五维草案 · 待核验</small></a></li>
+      <li><a href="/#latest">短视频完播率权重<small>30%→22%</small></a></li>
+      <li><a href="/#latest">机器人赛维修窗口<small>20→12 分钟</small></a></li>
+      <li><a href="/#latest">创业赛路演重抽<small>16 组 · 两评委延误</small></a></li>
+    </ol>
+  </section>
+  <section class="side-card" aria-labelledby="verifyTitle">
+    <h3 id="verifyTitle">线报可信度分层</h3>
+    <ul class="tight-list" style="font-size:13px">
+      <li><span>官方公告</span><span>带编号与版本</span><span class="badge t">高</span></li>
+      <li><span>选手原话</span><span>附截图时间</span><span class="badge t">中高</span></li>
+      <li><span>群聊转述</span><span>无原始出处</span><span class="badge">低</span></li>
+      <li><span>推测</span><span>无材料支持</span><span class="badge r">待证</span></li>
+    </ul>
+    <p class="small" style="margin-top:8px">分层只看证据形态，不看说话人身份。教练说的也可能是转述。</p>
+  </section>
+</aside>
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <svg viewBox="0 0 64 64" role="img" aria-label="页脚标志">
+            <rect width="64" height="64" rx="14" fill="#175f7f"/>
+            <path d="M12 42l11-16 8 11 6-8 11 15z" fill="#ffb547"/>
+            <circle cx="45" cy="20" r="6" fill="#9fd6d2"/>
+          </svg>
+          <span class="brand-text">
+            <span class="brand-name">大赛每日在线爆料平台</span>
+            <span class="brand-sub">把每条线报放回它的证据层</span>
+          </span>
+        </div>
+        <p class="small" style="color:#a8c8d8">按时间、来源、可核验程度整理赛事动态，给参赛者一份能对照的清单。</p>
+      </div>
+      <div>
+        <h4>爆料栏目</h4>
+        <ul class="footer-links">
+          <li><a href="/#latest">今日更新</a></li>
+          <li><a href="/#featured">精选条目</a></li>
+          <li><a href="/#channels">分类频道</a></li>
+          <li><a href="/#analysis">深度解析</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>参赛工具</h4>
+        <ul class="footer-links">
+          <li><a href="/#guide">提交前检查清单</a></li>
+          <li><a href="/#faq">常见问答</a></li>
+          <li><a href="/#timeline">节点时间线</a></li>
+          <li><a href="/#comments">选手反馈</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>关于本页</h4>
+        <ul class="footer-links">
+          <li>示例数据说明：条目、人名、赛事名均为演示用示例，日期设定于 2026 年 11 月 8 日前后 30 天内。</li>
+          <li>更新时间：11 月 8 日 09:20，对应“最新更新”板块首条更正公告。</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 大赛每日在线爆料平台 · 内容为演示示例，不构成赛事官方信息</span>
+      <span>线报核验口径：官方公告 &gt; 选手原话 &gt; 群聊转述 &gt; 推测</span>
+    </div>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" type="button" aria-label="回到页面顶部">↑</button>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "大赛每日在线爆料平台",
+  "description": "汇总设计、编程、短视频等赛事的每日线报，含报名节点、评审进度、名单变化与核验方法。",
+  "inLanguage": "zh-CN"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "复赛名单公布后还会改吗？",
+      "acceptedAnswer": {"@type": "Answer", "text": "会，但改动通常有痕迹。按 10 月 20 日以来的记录，名单调整都会配一份带版本号的更正公告，并给受影响选手单独发邮件。若只看到群消息说名单要变，没有公告编号，先按转述处理。"}
+    },
+    {
+      "@type": "Question",
+      "name": "评测机判题结果和本地不一致怎么办？",
+      "acceptedAnswer": {"@type": "Answer", "text": "先核对编译参数与内存限制。编程挑战赛 11 月 6 日把评测节点从 8 台增到 12 台，环境版本未变，但部分选手本地用了更高版本的编译器。提交页会显示评测机语言版本号，对照后再决定是否申请重测。"}
+    },
+    {
+      "@type": "Question",
+      "name": "短视频赛完播率权重下调会影响已发布作品吗？",
+      "acceptedAnswer": {"@type": "Answer", "text": "影响按新规则重算的榜单。11 月 4 日补充规则把完播率从 30% 降到 22%，新增互动深度 10%。已发布作品不回炉，但 11 月 5 日之后的数据按新权重计。历史数据仍可查，只是不再决定名次。"}
+    },
+    {
+      "@type": "Question",
+      "name": "作品被指重复提交，以哪个版本为准？",
+      "acceptedAnswer": {"@type": "Answer", "text": "平面设计赛明确以最后一次成功上传的版本为准，11 月 2 日统计的 63 份重复提交按此处理。若最后一次上传在截止后，系统会拒收，此时以截止前最后一次为准，需保留上传回执截图。"}
+    },
+    {
+      "@type": "Question",
+      "name": "原创性面谈没参加会怎样？",
+      "acceptedAnswer": {"@type": "Answer", "text": "命题创作赛把未参加面谈视为放弃入围资格。面谈 15 分钟，重点问草图来源、素材授权和修改过程，不考现场创作。11 月 5 日公告列出 60 人名单与面谈时段，改期需提前 24 小时申请。"}
+    }
+  ]
+}
+</script>
+<script>
+(function(){
+  "use strict";
+  // 菜单
+  var toggle = document.getElementById('menuToggle');
+  var nav = document.getElementById('mainNav');
+  if(toggle && nav){
+    toggle.addEventListener('click', function(){
+      var open = nav.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    nav.addEventListener('click', function(e){
+      if(e.target.tagName === 'A' && window.innerWidth <= 760){
+        nav.classList.remove('open');
+        toggle.setAttribute('aria-expanded','false');
+      }
+    });
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape' && nav.classList.contains('open')){
+        nav.classList.remove('open');
+        toggle.setAttribute('aria-expanded','false');
+        toggle.focus();
+      }
+    });
+  }
+
+  // 站内搜索
+  var input = document.getElementById('siteSearch');
+  var btn = document.getElementById('searchBtn');
+  var msg = document.getElementById('searchMsg');
+  function doSearch(){
+    var q = (input.value || '').trim();
+    if(!q){
+      msg.hidden = false;
+      msg.innerHTML = '请输入赛事名、节点或选手名，例如“复赛名单”“完播率”。';
+      return;
+    }
+    var targets = document.querySelectorAll('main .card h2, main .card h3, main .card p, main .card li, aside .side-card h3, aside .side-card li');
+    var firstHit = null, count = 0;
+    var lower = q.toLowerCase();
+    for(var i=0;i<targets.length;i++){
+      var el = targets[i];
+      if(el.textContent.toLowerCase().indexOf(lower) !== -1){
+        count++;
+        if(!firstHit){ firstHit = el; }
+      }
+    }
+    if(count > 0){
+      msg.hidden = false;
+      msg.innerHTML = '找到 <strong style="color:#1f7a78">' + count + '</strong> 处与“' + q.replace(/</g,'&lt;') + '”相关的内容，已定位到第一处。';
+      var sec = firstHit.closest('section');
+      if(sec && sec.id){
+        document.getElementById(sec.id).scrollIntoView({behavior:'smooth', block:'start'});
+      }
+    } else {
+      msg.hidden = false;
+      msg.innerHTML = '没有找到与“' + q.replace(/</g,'&lt;') + '”匹配的条目。可试“评审”“提交”“名单”“权重”等关键词。';
+    }
+  }
+  if(btn){ btn.addEventListener('click', doSearch); }
+  if(input){
+    input.addEventListener('keydown', function(e){
+      if(e.key === 'Enter'){ e.preventDefault(); doSearch(); }
+    });
+  }
+
+  // 回到顶部
+  var toTop = document.getElementById('toTop');
+  function onScroll(){
+    if(window.scrollY > 480){ toTop.classList.add('show'); }
+    else { toTop.classList.remove('show'); }
+    highlightNav();
+  }
+  if(toTop){
+    toTop.addEventListener('click', function(){
+      window.scrollTo({top:0, behavior:'smooth'});
+    });
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+
+  // 侧栏滚动高亮
+  var sideLinks = document.querySelectorAll('#sideNav a');
+  var sections = [];
+  sideLinks.forEach(function(a){
+    var id = a.getAttribute('href').split('#')[1];
+    var sec = document.getElementById(id);
+    if(sec){ sections.push({id:id, el:sec, link:a}); }
+  });
+  function highlightNav(){
+    var offset = 120;
+    var current = null;
+    for(var i=0;i<sections.length;i++){
+      if(sections[i].el.getBoundingClientRect().top - offset <= 0){ current = sections[i]; }
+    }
+    sideLinks.forEach(function(a){ a.classList.remove('active'); });
+    if(current){ current.link.classList.add('active'); }
+  }
+  highlightNav();
+})();
+</script>
+</body>
+          </html>
