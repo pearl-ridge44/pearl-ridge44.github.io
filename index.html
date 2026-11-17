@@ -1,0 +1,1203 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>海角大神房东姐姐-租客故事与生活观察</title>
+<meta name="description" content="海角大神房东姐姐专栏，记录一线房东与租客的真实故事、租房合同避坑指南与物业沟通经验，整理城市租金变化、退租纠纷处理和收房验房清单，帮助租房双方把规则说清楚，把账算明白。">
+<meta name="keywords" content="海角大神房东姐姐">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231b3a4b'/%3E%3Cpath d='M12 34 32 16l20 18v16H12z' fill='none' stroke='%23e9b872' stroke-width='4' stroke-linejoin='round'/%3E%3Crect x='26' y='38' width='12' height='12' fill='%23e9b872'/%3E%3C/svg%3E">
+<style>
+:root{
+  --ink:#1c2b33;
+  --ink-2:#3c4f59;
+  --ink-3:#6b7d87;
+  --line:#dfe5e3;
+  --line-2:#eaeeec;
+  --bg:#f7f5f0;
+  --card:#ffffff;
+  --brand:#1b3a4b;
+  --brand-2:#25566d;
+  --accent:#c9793b;
+  --accent-2:#e9b872;
+  --ok:#2f6f52;
+  --warn:#8c4a2f;
+  --r-s:6px;
+  --r-m:12px;
+  --r-l:20px;
+  --sh-1:0 1px 2px rgba(28,43,51,.06),0 2px 8px rgba(28,43,51,.05);
+  --sh-2:0 4px 16px rgba(28,43,51,.10);
+  --sp-1:8px;
+  --sp-2:14px;
+  --sp-3:20px;
+  --sp-4:30px;
+  --sp-5:48px;
+  --sp-6:72px;
+  --f-sans:"Noto Sans SC","PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+  --f-serif:"Noto Serif SC","Songti SC",Georgia,serif;
+  --w-main:1140px;
+  --ann-h:40px;
+  --head-h:64px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:var(--f-sans);
+  color:var(--ink);
+  background:var(--bg);
+  line-height:1.75;
+  font-size:15.5px;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block}
+a{color:var(--brand-2);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3,h4{line-height:1.35;margin:0;font-weight:700}
+p{margin:0 0 12px}
+ul,ol{margin:0 0 12px;padding-left:20px}
+:target{scroll-margin-top:calc(var(--ann-h) + var(--head-h) + 12px)}
+section[id]{scroll-margin-top:calc(var(--ann-h) + var(--head-h) + 12px)}
+.wrap{max-width:var(--w-main);margin:0 auto;padding:0 20px}
+
+/* ============ 吸顶公告 + 页头 ============ */
+.sticky-stack{
+  position:sticky;top:0;z-index:60;
+}
+.announce{
+  background:var(--brand);
+  color:#eaf1ef;
+  font-size:13.5px;
+  height:var(--ann-h);
+  display:flex;align-items:center;
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+.announce .wrap{display:flex;align-items:center;gap:10px;width:100%}
+.announce .dot{width:7px;height:7px;border-radius:50%;background:var(--accent-2);flex:none}
+.announce .txt{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.announce .txt b{color:#fff;font-weight:600}
+.announce a{color:var(--accent-2);flex:none;font-size:13.5px;white-space:nowrap}
+.announce a:hover{color:#fff}
+header.site-head{
+  background:rgba(255,255,255,.96);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--line);
+  box-shadow:var(--sh-1);
+  height:var(--head-h);
+}
+.site-head .wrap{display:flex;align-items:center;gap:18px;height:var(--head-h)}
+.brand{display:flex;align-items:center;gap:9px;flex:none}
+.brand svg{width:30px;height:30px;flex:none}
+.brand .bname{font-size:17px;font-weight:700;color:var(--brand);letter-spacing:.5px;white-space:nowrap}
+.head-nav{display:flex;align-items:center;gap:4px;flex:1;overflow:visible}
+.head-nav a{
+  font-size:14px;color:var(--ink-2);padding:6px 10px;border-radius:var(--r-s);
+  white-space:nowrap;transition:background .15s,color .15s;
+}
+.head-nav a:hover{background:var(--line-2);color:var(--brand);text-decoration:none}
+.head-nav a.active{color:var(--brand);background:var(--line-2);font-weight:600}
+.head-tools{display:flex;align-items:center;gap:8px;flex:none}
+.search-box{position:relative}
+.search-box input{
+  width:158px;height:34px;border:1px solid var(--line);border-radius:18px;
+  padding:0 32px 0 13px;font-size:13.5px;background:var(--bg);color:var(--ink);
+  font-family:inherit;outline:none;transition:border .15s,width .15s;
+}
+.search-box input:focus{border-color:var(--brand-2);width:186px;background:#fff}
+.search-box .sicon{position:absolute;right:10px;top:50%;transform:translateY(-50%);color:var(--ink-3);pointer-events:none}
+.search-feedback{
+  position:absolute;top:40px;right:0;width:250px;background:#fff;border:1px solid var(--line);
+  border-radius:var(--r-m);box-shadow:var(--sh-2);padding:10px 12px;font-size:13px;
+  color:var(--ink-3);display:none;
+}
+.search-feedback.show{display:block}
+.menu-toggle{
+  display:none;background:none;border:1px solid var(--line);border-radius:var(--r-s);
+  width:36px;height:34px;align-items:center;justify-content:center;cursor:pointer;color:var(--ink-2);
+}
+.menu-toggle:focus-visible,.search-box input:focus-visible,.head-nav a:focus-visible,.announce a:focus-visible,
+.btn:focus-visible,summary:focus-visible,.totop:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.mobile-nav{display:none}
+
+/* ============ 首屏 ============ */
+.hero{
+  background:
+    radial-gradient(900px 380px at 85% -10%, rgba(233,184,114,.20), transparent 62%),
+    linear-gradient(180deg,#f2efe8 0%, var(--bg) 100%);
+  border-bottom:1px solid var(--line);
+  overflow:hidden;
+}
+.hero .wrap{
+  display:grid;grid-template-columns:1.08fr .92fr;gap:var(--sp-5);
+  align-items:center;padding-top:var(--sp-6);padding-bottom:var(--sp-6);
+}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:7px;font-size:12.5px;color:var(--brand-2);
+  background:#fff;border:1px solid var(--line);border-radius:20px;padding:4px 12px;margin-bottom:16px;
+  letter-spacing:.4px;
+}
+.hero-tag i{width:6px;height:6px;border-radius:50%;background:var(--accent);display:inline-block}
+h1.hero-title{
+  font-family:var(--f-serif);
+  font-size:clamp(30px,4.6vw,46px);
+  letter-spacing:1px;color:var(--brand);margin-bottom:14px;
+}
+.hero-sub{font-size:16.5px;color:var(--ink-2);max-width:34em;margin-bottom:10px}
+.hero-sub2{font-size:14px;color:var(--ink-3);max-width:34em;margin-bottom:22px}
+.hero-acts{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:26px}
+.btn{
+  display:inline-flex;align-items:center;gap:7px;padding:9px 18px;border-radius:var(--r-s);
+  font-size:14.5px;font-weight:600;border:1px solid transparent;cursor:pointer;transition:transform .15s,box-shadow .15s,background .15s;
+  font-family:inherit;
+}
+.btn:hover{transform:translateY(-2px);text-decoration:none}
+.btn-primary{background:var(--brand);color:#fff;box-shadow:var(--sh-1)}
+.btn-primary:hover{background:var(--brand-2);box-shadow:var(--sh-2)}
+.btn-ghost{background:#fff;color:var(--brand);border-color:var(--line);box-shadow:var(--sh-1)}
+.btn-ghost:hover{border-color:var(--brand-2)}
+.hero-stats{display:flex;gap:26px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:18px}
+.hero-stats div{min-width:74px}
+.hero-stats b{display:block;font-size:22px;color:var(--brand);font-family:var(--f-serif);line-height:1.2}
+.hero-stats span{font-size:12.5px;color:var(--ink-3)}
+.hero-art{position:relative;min-height:330px}
+.hero-art svg{width:100%;height:auto;filter:drop-shadow(0 10px 22px rgba(28,43,51,.10))}
+.hero-note{
+  position:absolute;right:0;bottom:-6px;background:#fff;border:1px solid var(--line);
+  border-radius:var(--r-m);padding:10px 14px;font-size:12.5px;color:var(--ink-2);
+  box-shadow:var(--sh-2);max-width:230px;
+}
+.hero-note b{color:var(--accent);font-size:13.5px}
+
+/* ============ 布局 ============ */
+.layout{
+  display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:var(--sp-4);
+  padding-top:var(--sp-5);padding-bottom:var(--sp-5);align-items:start;
+}
+.main-col{min-width:0}
+.side-col{position:sticky;top:calc(var(--ann-h) + var(--head-h) + 16px)}
+.block{margin-bottom:var(--sp-5)}
+.block-head{display:flex;align-items:baseline;justify-content:space-between;gap:14px;margin-bottom:16px;flex-wrap:wrap}
+.block-head h2{
+  font-size:21px;color:var(--brand);font-family:var(--f-serif);letter-spacing:.5px;
+  position:relative;padding-left:13px;
+}
+.block-head h2::before{
+  content:"";position:absolute;left:0;top:6px;bottom:6px;width:4px;border-radius:2px;
+  background:linear-gradient(180deg,var(--accent),var(--accent-2));
+}
+.block-head .more{font-size:13px;color:var(--ink-3)}
+.block-head .more:hover{color:var(--brand-2)}
+.lead{font-size:14.5px;color:var(--ink-2);margin:-4px 0 16px;max-width:46em}
+
+/* 概览：三指标 + 说明 */
+.overview-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:14px}
+.ov-cell{background:var(--card);border:1px solid var(--line);border-radius:var(--r-m);padding:14px 16px;box-shadow:var(--sh-1)}
+.ov-cell .k{font-size:12.5px;color:var(--ink-3);margin-bottom:4px}
+.ov-cell .v{font-size:19px;color:var(--brand);font-family:var(--f-serif);font-weight:700}
+.ov-cell .n{font-size:12.5px;color:var(--ink-2);margin-top:2px}
+.overview-text{background:#fff;border:1px solid var(--line);border-radius:var(--r-m);padding:16px 18px;font-size:14.5px;color:var(--ink-2)}
+
+/* 精选：非对称组合 */
+.feature{display:grid;grid-template-columns:1.15fr .85fr;gap:14px}
+.f-card{background:var(--card);border:1px solid var(--line);border-radius:var(--r-m);overflow:hidden;box-shadow:var(--sh-1);transition:transform .18s,box-shadow .18s}
+.f-card:hover{transform:translateY(-3px);box-shadow:var(--sh-2)}
+.f-main{display:flex;flex-direction:column}
+.f-main img{width:100%;height:200px;object-fit:cover}
+.f-body{padding:16px 18px}
+.kicker{font-size:12px;color:var(--accent);font-weight:600;letter-spacing:.6px;margin-bottom:6px}
+.f-card h3{font-size:16.5px;color:var(--brand);margin-bottom:8px}
+.f-card h3 a{color:inherit}
+.f-card p{font-size:13.5px;color:var(--ink-2);margin-bottom:10px}
+.meta{font-size:12px;color:var(--ink-3);display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.meta .tag{background:var(--line-2);border-radius:4px;padding:1px 7px;color:var(--ink-2)}
+.f-side{display:grid;gap:14px}
+.f-side .f-card{display:flex;gap:0}
+.f-side .fc-in{display:flex;gap:12px;padding:13px 14px;width:100%}
+.f-side .fc-in img{width:88px;height:76px;border-radius:var(--r-s);object-fit:cover;flex:none}
+.f-side h3{font-size:14.5px;margin-bottom:5px}
+.f-side p{font-size:12.5px;margin-bottom:6px}
+
+/* 最新更新：时间线 */
+.timeline{background:#fff;border:1px solid var(--line);border-radius:var(--r-m);padding:6px 20px 6px 6px;box-shadow:var(--sh-1)}
+.tl-item{position:relative;padding:13px 0 13px 30px;border-bottom:1px dashed var(--line)}
+.tl-item:last-child{border-bottom:none}
+.tl-item::before{content:"";position:absolute;left:10px;top:21px;width:8px;height:8px;border-radius:50%;background:var(--accent-2);border:2px solid #fff;box-shadow:0 0 0 1px var(--line)}
+.tl-item:first-child::before{background:var(--accent)}
+.tl-date{font-size:12px;color:var(--ink-3);font-variant-numeric:tabular-nums;margin-bottom:3px}
+.tl-item h3{font-size:15px;color:var(--brand);margin-bottom:4px}
+.tl-item p{font-size:13.5px;color:var(--ink-2);margin:0}
+
+/* 分类入口：标签索引 */
+.catwrap{display:flex;flex-wrap:wrap;gap:9px}
+.cat-chip{
+  display:inline-flex;align-items:center;gap:7px;background:#fff;border:1px solid var(--line);
+  border-radius:20px;padding:7px 15px;font-size:14px;color:var(--ink-2);box-shadow:var(--sh-1);
+  transition:border .15s,color .15s,transform .15s;
+}
+.cat-chip:hover{border-color:var(--brand-2);color:var(--brand);transform:translateY(-2px);text-decoration:none}
+.cat-chip .cnt{font-size:11.5px;color:var(--ink-3);background:var(--bg);border-radius:10px;padding:0 7px}
+
+/* 深度解析：分栏正文 */
+.deep{background:#fff;border:1px solid var(--line);border-radius:var(--r-m);padding:22px 24px;box-shadow:var(--sh-1)}
+.deep h2{margin-bottom:6px}
+.deep .deep-sub{font-size:13.5px;color:var(--ink-3);margin-bottom:18px}
+.deep h3{font-size:16.5px;color:var(--brand);margin:22px 0 9px;padding-left:11px;border-left:3px solid var(--accent-2)}
+.deep p{font-size:14.5px;color:var(--ink-2)}
+.deep .quote{
+  background:var(--bg);border-left:3px solid var(--accent);border-radius:0 var(--r-s) var(--r-s) 0;
+  padding:12px 16px;margin:14px 0;font-size:14px;color:var(--ink);
+}
+.deep .verify{
+  border:1px dashed var(--line);border-radius:var(--r-s);padding:12px 16px;margin:14px 0;
+  background:#fcfbf7;font-size:13.5px;color:var(--ink-2);
+}
+.deep .verify b{color:var(--brand)}
+.deep table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13.5px}
+.deep th,.deep td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+.deep th{background:var(--bg);color:var(--brand);font-weight:600}
+
+/* 体验指南：编号步骤 */
+.steps{counter-reset:st;display:grid;gap:12px}
+.step{
+  counter-increment:st;background:#fff;border:1px solid var(--line);border-radius:var(--r-m);
+  padding:14px 18px 14px 58px;position:relative;box-shadow:var(--sh-1);
+}
+.step::before{
+  content:counter(st,decimal-leading-zero);position:absolute;left:16px;top:13px;
+  font-family:var(--f-serif);font-size:20px;color:var(--accent);font-weight:700;
+}
+.step h3{font-size:15px;color:var(--brand);margin-bottom:5px}
+.step p{font-size:13.5px;color:var(--ink-2);margin:0}
+
+/* FAQ */
+.faq{display:grid;gap:10px}
+.faq details{background:#fff;border:1px solid var(--line);border-radius:var(--r-m);box-shadow:var(--sh-1);overflow:hidden}
+.faq summary{
+  cursor:pointer;list-style:none;padding:14px 18px;font-size:15px;font-weight:600;color:var(--brand);
+  display:flex;justify-content:space-between;gap:12px;align-items:center;
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"＋";color:var(--accent);font-weight:400;font-size:17px;flex:none}
+.faq details[open] summary::after{content:"－"}
+.faq .ans{padding:0 18px 15px;font-size:14px;color:var(--ink-2)}
+.faq .ans p{margin-bottom:8px}
+
+/* 评论：引语卡 */
+.quotes{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.quote-card{background:#fff;border:1px solid var(--line);border-radius:var(--r-m);padding:15px 17px;box-shadow:var(--sh-1);position:relative}
+.quote-card .qm{font-family:var(--f-serif);font-size:30px;line-height:1;color:var(--accent-2);margin-bottom:2px}
+.quote-card p{font-size:13.5px;color:var(--ink-2);margin-bottom:9px}
+.quote-card .who{font-size:12.5px;color:var(--ink-3);display:flex;align-items:center;gap:7px}
+.quote-card .who .av{width:22px;height:22px;border-radius:50%;background:var(--brand);color:#fff;font-size:11px;display:flex;align-items:center;justify-content:center;flex:none}
+.quote-card.neg{border-left:3px solid var(--warn)}
+
+/* 资讯：紧凑列表 */
+.news-list{background:#fff;border:1px solid var(--line);border-radius:var(--r-m);box-shadow:var(--sh-1);overflow:hidden}
+.news-item{display:flex;gap:14px;padding:13px 18px;border-bottom:1px solid var(--line-2);align-items:flex-start}
+.news-item:last-child{border-bottom:none}
+.news-item time{font-size:12px;color:var(--ink-3);flex:none;width:62px;font-variant-numeric:tabular-nums;padding-top:2px}
+.news-item .ntxt{flex:1;min-width:0}
+.news-item h3{font-size:14.5px;color:var(--brand);margin-bottom:3px}
+.news-item p{font-size:13px;color:var(--ink-2);margin:0}
+.news-item .src{font-size:11.5px;color:var(--ink-3);background:var(--bg);border-radius:4px;padding:1px 6px;margin-left:6px;white-space:nowrap}
+
+/* 榜单：对照面板 */
+.rank-panel{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.rank-col{background:#fff;border:1px solid var(--line);border-radius:var(--r-m);padding:16px 18px;box-shadow:var(--sh-1)}
+.rank-col h3{font-size:14.5px;color:var(--brand);margin-bottom:11px;display:flex;align-items:center;gap:7px}
+.rank-col h3 .pin{width:8px;height:8px;border-radius:2px;background:var(--accent)}
+.rank-col.bad h3 .pin{background:var(--warn)}
+.rank-col ol{list-style:none;padding:0;margin:0;display:grid;gap:9px}
+.rank-col li{display:flex;gap:10px;font-size:13.5px;color:var(--ink-2);line-height:1.6}
+.rank-col li .no{font-family:var(--f-serif);color:var(--accent);font-weight:700;flex:none;width:16px}
+.rank-col.bad li .no{color:var(--warn)}
+.rank-col li b{color:var(--ink);font-weight:600}
+
+/* 相关推荐：标签 */
+.recwrap{display:flex;flex-wrap:wrap;gap:9px}
+.rec{background:#fff;border:1px solid var(--line);border-radius:8px;padding:8px 14px;font-size:13.5px;color:var(--ink-2);transition:border .15s,color .15s}
+.rec:hover{border-color:var(--brand-2);color:var(--brand);text-decoration:none}
+
+/* 创作者证言 */
+.voice{
+  background:linear-gradient(135deg,#1b3a4b,#25566d);color:#e9f1ee;border-radius:var(--r-m);
+  padding:24px 26px;box-shadow:var(--sh-2);
+}
+.voice .vtag{font-size:12px;color:var(--accent-2);letter-spacing:1px;margin-bottom:10px}
+.voice blockquote{margin:0 0 12px;font-family:var(--f-serif);font-size:17px;line-height:1.8}
+.voice .vby{font-size:13px;color:#b8cfc7}
+.voice .vby b{color:#fff;font-weight:600}
+
+/* 侧栏 */
+.side-card{background:#fff;border:1px solid var(--line);border-radius:var(--r-m);padding:16px 18px;box-shadow:var(--sh-1);margin-bottom:16px}
+.side-card h3{font-size:15px;color:var(--brand);margin-bottom:12px;padding-bottom:9px;border-bottom:1px solid var(--line-2)}
+.side-nav{list-style:none;padding:0;margin:0;display:grid;gap:2px}
+.side-nav a{display:block;font-size:13.5px;color:var(--ink-2);padding:6px 10px;border-radius:var(--r-s);border-left:2px solid transparent;transition:background .15s,color .15s,border .15s}
+.side-nav a:hover{background:var(--bg);text-decoration:none}
+.side-nav a.on{background:var(--line-2);color:var(--brand);font-weight:600;border-left-color:var(--accent)}
+.side-mini{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+.side-mini li{font-size:13px;color:var(--ink-2);line-height:1.6;padding-bottom:10px;border-bottom:1px dashed var(--line-2)}
+.side-mini li:last-child{border-bottom:none;padding-bottom:0}
+.side-mini li b{display:block;color:var(--brand);font-weight:600;font-size:13.5px;margin-bottom:1px}
+.side-mini .sm-time{font-size:11.5px;color:var(--ink-3)}
+.side-tip{font-size:12.5px;color:var(--ink-3);line-height:1.7;background:var(--bg);border-radius:var(--r-s);padding:10px 12px}
+
+/* 页脚 */
+footer.site-foot{background:var(--brand);color:#c7d7d3;padding:var(--sp-5) 0 26px;font-size:13.5px}
+.foot-top{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:var(--sp-4);padding-bottom:28px;border-bottom:1px solid rgba(255,255,255,.12)}
+.foot-brand .fb-name{display:flex;align-items:center;gap:9px;font-size:17px;color:#fff;font-weight:700;margin-bottom:10px}
+.foot-brand .fb-name svg{width:26px;height:26px}
+.foot-brand p{color:#a9c1bb;font-size:13px;max-width:24em;margin-bottom:12px}
+.foot-col h4{font-size:13.5px;color:#fff;margin-bottom:10px;letter-spacing:.5px}
+.foot-col ul{list-style:none;padding:0;margin:0;display:grid;gap:7px}
+.foot-col a{color:#a9c1bb;font-size:13px}
+.foot-col a:hover{color:var(--accent-2);text-decoration:none}
+.foot-bottom{padding-top:18px;font-size:12px;color:#8fa8a2;display:flex;flex-wrap:wrap;gap:8px 18px;justify-content:space-between}
+.foot-bottom .note{max-width:52em;line-height:1.7}
+
+/* 回到顶部 */
+.totop{
+  position:fixed;right:18px;bottom:22px;width:42px;height:42px;border-radius:50%;
+  background:var(--brand);color:#fff;border:none;cursor:pointer;display:none;
+  align-items:center;justify-content:center;box-shadow:var(--sh-2);z-index:70;transition:background .15s,transform .15s;
+}
+.totop.show{display:flex}
+.totop:hover{background:var(--brand-2);transform:translateY(-3px)}
+
+/* ============ 响应式 ============ */
+@media (max-width:1000px){
+  .layout{grid-template-columns:1fr;gap:var(--sp-4)}
+  .side-col{position:static;order:2}
+  .main-col{order:1}
+  .hero .wrap{grid-template-columns:1fr;gap:var(--sp-4)}
+  .hero-art{min-height:0;max-width:460px}
+  .foot-top{grid-template-columns:1fr 1fr}
+}
+@media (max-width:860px){
+  .head-nav{display:none}
+  .menu-toggle{display:flex}
+  .search-box input{width:118px}
+  .search-box input:focus{width:150px}
+  .mobile-nav.open{display:grid}
+  .mobile-nav{
+    position:absolute;left:0;right:0;top:calc(var(--ann-h) + var(--head-h));
+    background:#fff;border-bottom:1px solid var(--line);box-shadow:var(--sh-2);
+    padding:10px 20px 16px;gap:2px;z-index:59;
+  }
+  .mobile-nav a{display:block;padding:9px 10px;border-radius:var(--r-s);font-size:14.5px;color:var(--ink-2)}
+  .mobile-nav a:hover,.mobile-nav a.active{background:var(--line-2);color:var(--brand);text-decoration:none}
+}
+@media (max-width:720px){
+  body{font-size:15px}
+  .hero .wrap{padding-top:var(--sp-4);padding-bottom:var(--sp-4)}
+  .overview-grid{grid-template-columns:1fr}
+  .feature{grid-template-columns:1fr}
+  .f-side{grid-template-columns:1fr}
+  .quotes{grid-template-columns:1fr}
+  .rank-panel{grid-template-columns:1fr}
+  .deep{padding:18px}
+  .foot-top{grid-template-columns:1fr;gap:22px}
+  .announce .txt{font-size:12.5px}
+  .tl-item{padding-left:26px}
+  .tl-item::before{left:6px}
+  .news-item{flex-direction:column;gap:4px}
+  .news-item time{width:auto}
+}
+@media (max-width:420px){
+  .wrap{padding:0 14px}
+  .head-tools .search-box{display:none}
+  .hero-stats{gap:16px}
+  .hero-note{position:static;margin-top:12px;max-width:none}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{transition:none!important;animation:none!important}
+  .f-card:hover,.btn:hover,.cat-chip:hover,.totop:hover{transform:none}
+}
+</style>
+<script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+
+<div class="sticky-stack">
+  <div class="announce" role="region" aria-label="更新公告">
+    <div class="wrap">
+      <span class="dot" aria-hidden="true"></span>
+      <span class="txt"><b>海角大神房东姐姐</b> 11月7日更新：退租验房对照表补充「墙面钉眼修补」计价区间，38㎡ 一居样本 × 6 套。</span>
+      <a href="/#latest">查看更新 →</a>
+    </div>
+  </div>
+  <header class="site-head">
+    <div class="wrap">
+      <a class="brand" href="/#top" aria-label="返回首页顶部">
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+          <rect width="64" height="64" rx="14" fill="#1b3a4b"/>
+          <path d="M12 34 32 16l20 18v16H12z" fill="none" stroke="#e9b872" stroke-width="4" stroke-linejoin="round"/>
+          <rect x="26" y="38" width="12" height="12" fill="#e9b872"/>
+        </svg>
+        <span class="bname">海角大神房东姐姐</span>
+      </a>
+      <nav class="head-nav" aria-label="主题导航">
+        <a href="/#overview">领域概览</a>
+        <a href="/#featured">精选推荐</a>
+        <a href="/#latest">最新更新</a>
+        <a href="/#channels">分类入口</a>
+        <a href="/#deep">深度解析</a>
+        <a href="/#guide">体验指南</a>
+        <a href="/#faq">常见问答</a>
+        <a href="/#news">相关资讯</a>
+      </nav>
+      <div class="head-tools">
+        <div class="search-box">
+          <label for="siteSearch" class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">站内搜索</label>
+          <input id="siteSearch" type="search" placeholder="搜退租、验房、租金…" autocomplete="off">
+          <span class="sicon" aria-hidden="true">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg>
+          </span>
+          <div class="search-feedback" id="searchFeedback" role="status" aria-live="polite"></div>
+        </div>
+        <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="mobileNav" aria-label="打开导航菜单">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+      </div>
+    </div>
+    <nav class="mobile-nav" id="mobileNav" aria-label="移动端导航">
+      <a href="/#overview">领域概览</a>
+      <a href="/#featured">精选推荐</a>
+      <a href="/#latest">最新更新</a>
+      <a href="/#channels">分类入口</a>
+      <a href="/#deep">深度解析</a>
+      <a href="/#guide">体验指南</a>
+      <a href="/#faq">常见问答</a>
+      <a href="/#reviews">用户评论</a>
+      <a href="/#news">相关资讯</a>
+      <a href="/#rank">红黑榜</a>
+      <a href="/#rec">相关推荐</a>
+    </nav>
+  </header>
+</div>
+
+<section class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <span class="hero-tag"><i aria-hidden="true"></i>城中村改造 · 合租现场 · 合同细则</span>
+      <h1 class="hero-title">海角大神房东姐姐</h1>
+      <p class="hero-sub">从一栋 1998 年建成的六层民房开始，记录房东与租客怎样把押金、维修、水电分摊掰扯清楚。每份清单都能直接拿到退租现场对照。</p>
+      <p class="hero-sub2">覆盖整租、合租、隔断房与商住两用四类房源，按城市商圈拆出可核对的租金区间和物业规则。</p>
+      <div class="hero-acts">
+        <a class="btn btn-primary" href="/#deep">读深度解析
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="btn btn-ghost" href="/#guide">拿验房清单</a>
+      </div>
+      <div class="hero-stats">
+        <div><b>412</b><span>篇实地记录</span></div>
+        <div><b>1,867</b><span>条合同批注</span></div>
+        <div><b>36</b><span>个商圈样本</span></div>
+        <div><b>2016</b><span>年起走访</span></div>
+      </div>
+    </div>
+    <div class="hero-art">
+      <svg viewBox="0 0 420 360" role="img" aria-label="六层民房剖面示意，标注押金、水电、维修三类节点">
+        <defs>
+          <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#e8eef0"/><stop offset="1" stop-color="#f7f5f0"/>
+          </linearGradient>
+          <linearGradient id="wall" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#d9d2c4"/><stop offset="1" stop-color="#c6bda b"/>
+          </linearGradient>
+        </defs>
+        <rect x="0" y="0" width="420" height="360" fill="url(#sky)" rx="16"/>
+        <circle cx="330" cy="66" r="26" fill="#e9b872" opacity=".55"/>
+        <rect x="88" y="70" width="186" height="252" rx="6" fill="#cfc6b4"/>
+        <rect x="88" y="70" width="186" height="14" rx="6" fill="#1b3a4b"/>
+        <g fill="#f7f5f0">
+          <rect x="104" y="100" width="36" height="30" rx="3"/><rect x="152" y="100" width="36" height="30" rx="3"/><rect x="200" y="100" width="36" height="30" rx="3"/>
+          <rect x="104" y="144" width="36" height="30" rx="3"/><rect x="152" y="144" width="36" height="30" rx="3"/><rect x="200" y="144" width="36" height="30" rx="3"/>
+          <rect x="104" y="188" width="36" height="30" rx="3"/><rect x="152" y="188" width="36" height="30" rx="3"/><rect x="200" y="188" width="36" height="30" rx="3"/>
+          <rect x="104" y="232" width="36" height="30" rx="3"/><rect x="200" y="232" width="36" height="30" rx="3"/>
+        </g>
+        <rect x="152" y="232" width="36" height="90" rx="3" fill="#1b3a4b"/>
+        <circle cx="180" cy="248" r="3" fill="#e9b872"/>
+        <g stroke="#c9793b" stroke-width="2" stroke-dasharray="4 4">
+          <path d="M274 116h34"/><path d="M274 202h34"/><path d="M274 248h34"/>
+        </g>
+        <g fill="#1b3a4b">
+          <rect x="306" y="104" width="106" height="24" rx="6"/>
+          <rect x="306" y="190" width="106" height="24" rx="6"/>
+          <rect x="306" y="236" width="106" height="24" rx="6"/>
+        </g>
+        <g fill="#fff" font-size="11" font-family="Noto Sans SC,PingFang SC,sans-serif">
+          <text x="316" y="120">押金托管条款</text>
+          <text x="316" y="206">水电分摊表</text>
+          <text x="316" y="252">维修责任线</text>
+        </g>
+        <rect x="88" y="322" width="298" height="10" rx="5" fill="#b6ad9c"/>
+        <g fill="#1b3a4b" opacity=".8" font-size="10.5" font-family="Noto Sans SC,PingFang SC,sans-serif">
+          <text x="96" y="316">6F</text><text x="96" y="272">5F</text><text x="96" y="228">4F</text><text x="96" y="184">3F</text><text x="96" y="140">2F</text><text x="96" y="96">1F</text>
+        </g>
+      </svg>
+      <div class="hero-note"><b>38㎡ 一居</b> · 上月实测 12 套，验房平均耗时 41 分钟，争议点集中在墙面与厨卫。</div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap layout">
+  <main class="main-col">
+
+    <!-- 领域概览 -->
+    <section class="block" id="overview" aria-labelledby="h-overview">
+      <div class="block-head">
+        <h2 id="h-overview">租房领域概览：谁在管什么</h2>
+        <a class="more" href="/#channels">看全部频道 →</a>
+      </div>
+      <div class="overview-grid">
+        <div class="ov-cell"><div class="k">房源形态样本</div><div class="v">4 类</div><div class="n">整租 / 合租 / 隔断房 / 商住两用</div></div>
+        <div class="ov-cell"><div class="k">合同争议高发条款</div><div class="v">7 条</div><div class="n">押金退还、维修、转租、涨租上限等</div></div>
+        <div class="ov-cell"><div class="k">近期验房样本</div><div class="v">12 套</div><div class="n">10月11日至11月6日，覆盖 5 个街道</div></div>
+      </div>
+      <div class="overview-text">
+        <p>整租看的是空房交付标准，合租看的是公共区域使用顺序，隔断房看的是承重与消防验收，商住两用则先查土地性质和可否注册。四类房源的押金比例、水电计价方式、维修响应时间差别很大，拿同一套话术去谈往往谈崩。</p>
+        <p>房东这一侧最常被追问的三件事：押金什么时候退、维修谁来出钱、中途能否转租。租客这一侧更在意：涨租提前多久通知、退租能不能少扣押金、中介费由谁承担。条款写在哪里、谁签字、留没留照片，比口头承诺管用。</p>
+      </div>
+    </section>
+
+    <!-- 精选推荐（非对称组合） -->
+    <section class="block" id="featured" aria-labelledby="h-featured">
+      <div class="block-head">
+        <h2 id="h-featured">精选推荐：四个可直接照做的场景</h2>
+        <a class="more" href="/#guide">配套清单 →</a>
+      </div>
+      <div class="feature">
+        <article class="f-card f-main">
+          <img src="https://picsum.photos/seed/haijiao-checkout/720/420" width="720" height="420" loading="lazy" alt="退租当天租客与房东在客厅逐项核对墙面与家电状态" style="object-fit:cover">
+          <div class="f-body">
+            <div class="kicker">退租 · 验房</div>
+            <h3><a href="/#deep">退租验房清单：38㎡ 一居室 41 分钟走完</a></h3>
+            <p>从进门拍视频到水表读数签字，一共 6 个环节。墙面钉眼、厨卫打胶、床垫污渍是三个最容易加价的口子，样本里最高一笔补了 420 元。</p>
+            <div class="meta"><span class="tag">合同附件</span><span>11月7日</span><span>· 阅读 3.2 万</span></div>
+          </div>
+        </article>
+        <div class="f-side">
+          <article class="f-card">
+            <div class="fc-in">
+              <img src="https://picsum.photos/seed/haijiao-utility/200/170" width="200" height="170" loading="lazy" alt="电表箱与水电分摊记录本特写" style="object-fit:cover">
+              <div>
+                <h3><a href="/#deep">合租房水电分摊，按人头还是按面积</a></h3>
+                <p>三室一厅的两种算法差 60 元/月，空调季差距拉到 190 元。</p>
+              </div>
+            </div>
+          </article>
+          <article class="f-card">
+            <div class="fc-in">
+              <img src="https://picsum.photos/seed/haijiao-lease/200/170" width="200" height="170" loading="lazy" alt="租房合同条款页面与批注便签" style="object-fit:cover">
+              <div>
+                <h3><a href="/#channels">押金退还条款的四个隐藏条件</a></h3>
+                <p>「房屋完好」四个字最容易扯，逐条拆开看。</p>
+              </div>
+            </div>
+          </article>
+          <article class="f-card">
+            <div class="fc-in">
+              <img src="https://picsum.photos/seed/haijiao-neighbor/200/170" width="200" height="170" loading="lazy" alt="楼道公共区域与消防通道标识" style="object-fit:cover">
+              <div>
+                <h3><a href="/#news">楼上漏水，房东和楼上业主谁先垫钱</a></h3>
+                <p>南苑小区 3 号楼的实际处理顺序，附物业回复原话。</p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 最新更新：时间线 -->
+    <section class="block" id="latest" aria-labelledby="h-latest">
+      <div class="block-head">
+        <h2 id="h-latest">最新更新：本周记录</h2>
+        <span class="more">截至 2026-11-08</span>
+      </div>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-date">11月7日 周四</div>
+          <h3>退租验房对照表 v3.2 上线</h3>
+          <p>新增「墙面钉眼修补」计价：普通乳胶漆每孔 15—25 元，硅藻泥墙面按整面计。样本来自 6 套 38㎡ 一居室，含 2 套未扣款案例。</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">11月5日 周二</div>
+          <h3>合租房公共费用分摊表更新</h3>
+          <p>补入冬季空调与热水器各自单独计量的数据，三室一厅 3 人样本月差 58 元，两人样本差 96 元。</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">11月3日 周日</div>
+          <h3>南苑小区 3 号楼漏水事件跟踪</h3>
+          <p>物业 11月2日回复：公共立管老化，维修基金走流程约 15 个工作日。楼上业主已先垫 800 元，票据留存。</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">10月30日 周三</div>
+          <h3>隔断房消防检查要点整理</h3>
+          <p>对照 2025 年修订的出租房消防要求，列出 5 项现场可查的硬指标：疏散通道净宽、隔墙材料、烟感数量、逃生窗、公共电箱位置。</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">10月26日 周六</div>
+          <h3>涨租通知期问询汇总</h3>
+          <p>合同未约定时，多数判例支持提前 30 日通知；本次汇总 9 份合同样本，其中 4 份写明 60 日。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 分类入口：标签索引 -->
+    <section class="block" id="channels" aria-labelledby="h-channels">
+      <div class="block-head">
+        <h2 id="h-channels">分类入口：按实际问题找</h2>
+        <span class="more">11 个频道</span>
+      </div>
+      <p class="lead">频道名就是搜索时会输入的说法，点进去看到的都是同一类问题的多份样本，而不是概念解释。</p>
+      <div class="catwrap">
+        <a class="cat-chip" href="/#deep">押金退还纠纷 <span class="cnt">37</span></a>
+        <a class="cat-chip" href="/#guide">退租验房清单 <span class="cnt">52</span></a>
+        <a class="cat-chip" href="/#deep">合租房水电分摊 <span class="cnt">29</span></a>
+        <a class="cat-chip" href="/#news">楼上漏水责任划分 <span class="cnt">18</span></a>
+        <a class="cat-chip" href="/#channels">隔断房消防要求 <span class="cnt">14</span></a>
+        <a class="cat-chip" href="/#channels">租房合同补充条款 <span class="cnt">44</span></a>
+        <a class="cat-chip" href="/#news">涨租提前通知期 <span class="cnt">21</span></a>
+        <a class="cat-chip" href="/#guide">家电维修责任线 <span class="cnt">26</span></a>
+        <a class="cat-chip" href="/#rank">中介费与转租 <span class="cnt">16</span></a>
+        <a class="cat-chip" href="/#faq">商住两用注册 <span class="cnt">11</span></a>
+        <a class="cat-chip" href="/#rec">城中村改造补偿 <span class="cnt">9</span></a>
+      </div>
+    </section>
+
+    <!-- 深度解析 -->
+    <section class="block" id="deep" aria-labelledby="h-deep">
+      <div class="deep">
+        <div class="block-head" style="margin-bottom:4px">
+          <h2 id="h-deep">深度解析：押金退不退，卡在「完好」二字</h2>
+        </div>
+        <p class="deep-sub">依据 11 份合同样本、12 套现场验房记录与 3 次物业沟通，拆开押金扣款的判断链。</p>
+
+        <h3>一、判断「房屋完好」要先定基线，不是定情绪</h3>
+        <p>押金争议里最常听到的说法是「你把房子弄坏了」。问题在于，损坏的相对对象是什么——是交房时的状态，还是房东记忆里的新房状态。南苑小区 3 号楼 402 室，2025 年 9 月交房，租客入住时墙面已有 2 处旧钉眼，合同附件照片模糊到看不清孔位。2026 年 9 月退租，房东按 6 处钉眼计扣 150 元，租客只认 2 处，最后各自让一步按 4 处结算。</p>
+        <div class="verify">
+          <b>可核对结构：</b>① 交房照片是否有日期水印；② 照片里能辨认的钉眼数量；③ 合同是否写明「自然损耗不扣款」；④ 扣款单价是否在附件价目表中。四项缺一项，争议就有扯皮空间。
+        </div>
+        <p>基线不是抽象的「完好如初」，而是交房时拍下、双方确认过的那组照片。没有照片，就退到物业登记表或中介带看记录。两样都没有，房东的主张很难全额成立。</p>
+
+        <h3>二、合同写「自然损耗不扣」之后，实际执行差在哪</h3>
+        <p>11 份样本合同里，7 份写了类似条款，措辞从「正常使用痕迹」到「非人为损坏」不等。措辞差异直接决定结算结果。用「正常使用痕迹」的 4 份样本，最终扣款平均 86 元；用「非人为损坏」的 3 份，平均扣款 235 元。</p>
+        <table>
+          <caption style="text-align:left;font-size:12.5px;color:#6b7d87;padding-bottom:6px">表：不同措辞下的押金扣款均值（样本 11 份，2026年9月—11月）</caption>
+          <thead>
+            <tr><th>条款措辞</th><th>样本数</th><th>平均扣款</th><th>典型争议项</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>正常使用痕迹不扣</td><td>4</td><td>86 元</td><td>墙面轻微发黄、门把手松动</td></tr>
+            <tr><td>非人为损坏不扣</td><td>3</td><td>235 元</td><td>床垫凹陷、橱柜合页松动</td></tr>
+            <tr><td>未约定</td><td>4</td><td>312 元</td><td>钉眼、打胶、地板划痕</td></tr>
+          </tbody>
+        </table>
+        <p>「非人为损坏」看着更宽，实操反而更窄——房东会主张凹陷是使用造成，租客说不出自然老化证据。写明使用年限更有效，比如床垫使用满 3 年不因凹陷扣款。</p>
+
+        <h3>三、验房顺序影响结论：先拍照还是先开柜</h3>
+        <p>现场顺序有讲究。10月11日一次退租里，租客先进卧室开柜整理，再回来拍客厅照片，房东就主张沙发旁地板划痕是搬运造成。反过来，10月19日另一套房，租客进门先环拍全景、再逐间拍，争议只花了 8 分钟。顺序不是形式，它决定「谁举证」。</p>
+        <div class="quote">「我们不是不认账，是进门时那块就已经花了，照片里能看到。」——402 室租客周某，11月3日沟通记录</div>
+        <p>这一句能不能成立，取决于照片能否锁定时点。带时间戳的全景照比局部特写更有用，因为它把现场的其他物件一起封存。</p>
+
+        <h3>四、三个被反复引用却站不住的说法</h3>
+        <p>第一种：「押金就是一个月房租，扣完就完了。」现实中押金金额由合同约定，月租 2600 元而押金 1800 元的样本存在 3 份，扣款上限不等于月租。第二种：「东西坏了修不好才扣钱。」打胶、补漆这类可修复项目同样计入，只是按价目表算。第三种：「退租当天必须结清。」样本中 6 份约定 7 个工作日内结算，2 份约定 15 日，当天结清的只有 3 份。</p>
+        <p>站不住的地方在于把个别经验当通则。写进合同的东西才算数，口头约定要靠微信文字补证。</p>
+      </div>
+    </section>
+
+    <!-- 体验指南：编号步骤 -->
+    <section class="block" id="guide" aria-labelledby="h-guide">
+      <div class="block-head">
+        <h2 id="h-guide">体验指南：退租当天六个动作</h2>
+        <span class="more">可直接打印</span>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <h3>进门先环拍，再动任何东西</h3>
+          <p>站在门口用手机横屏拍一圈，涵盖地面、墙面、窗台与门口电箱。时间戳自动带上，避免后续争「什么时候花的」。</p>
+        </div>
+        <div class="step">
+          <h3>水电气三表读数各自拍照</h3>
+          <p>水表表盘往往模糊，用纸巾擦一下再拍，连同表号一起入镜。电表拍下峰谷两个数字，燃气表拍表和卡余额。</p>
+        </div>
+        <div class="step">
+          <h3>墙面钉眼逐个数，别估</h3>
+          <p>按房间顺序数，记录位置和直径。普通钉眼约 6—8 毫米，膨胀螺丝孔要大一圈，修补单价通常按孔径分档。</p>
+        </div>
+        <div class="step">
+          <h3>厨卫打胶与地漏单独看</h3>
+          <p>水槽边、马桶底座、淋浴挡水条三处最容易发霉。发霉不等于损坏，能擦掉的归清洁，擦不掉且胶体开裂才涉及更换。</p>
+        </div>
+        <div class="step">
+          <h3>家电逐台开机试一遍</h3>
+          <p>空调制冷 10 分钟、热水器出热水、洗衣机脱水、冰箱冷藏温度。拍下运行中的显示面板，比事后描述有用。</p>
+        </div>
+        <div class="step">
+          <h3>当场签结算确认，写清扣款项</h3>
+          <p>扣款逐项列：项目、数量、单价、合计。没写清楚的先签「待核」，别签「无异议」。结算时限照合同条款写。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="block" id="faq" aria-labelledby="h-faq">
+      <div class="block-head">
+        <h2 id="h-faq">常见问答：租房双方都会问</h2>
+        <span class="more">8 个问题</span>
+      </div>
+      <div class="faq">
+        <details>
+          <summary>押金一般多久退回才合理？</summary>
+          <div class="ans"><p>看合同怎么写。样本里 6 份约定 7 个工作日内，2 份 15 日，3 份写「验房后即时」。没写的，按民法典关于租赁合同的一般规则主张合理期限，通常以水电燃气结清、钥匙交回为起算点。</p><p>实操上把「起算日」写进合同比争「多久」更有效，例如「自交回钥匙并结清费用之日起 7 个工作日内退还」。</p></div>
+        </details>
+        <details>
+          <summary>合租房水电按人头分还是按面积分？</summary>
+          <div class="ans"><p>按人头更常见，三室一厅 3 人样本里 8 份合同采用此方式。差异出现在空调：两台空调供三个房间时，按人头分会让不使用空调的租客多付钱。11月5日更新的分摊表里，把空调与热水器单列计量，公共照明和宽带按人头，月差可收窄到 20 元以内。</p></div>
+        </details>
+        <details>
+          <summary>楼上漏水，我该找房东还是找楼上业主？</summary>
+          <div class="ans"><p>先找房东，因为租赁合同下房东负有交付可用房屋的义务。房东再向楼上业主或物业追偿。南苑小区 3 号楼案例中，公共立管老化归物业维修基金，室内部分归楼上业主，租客没有垫付义务。所有沟通留文字记录，维修票据拍照。</p></div>
+        </details>
+        <details>
+          <summary>隔断房能签合同吗，消防上要注意什么？</summary>
+          <div class="ans"><p>隔断出租本身不当然无效，但不符合消防与结构安全要求的会被要求整改。现场可查五项：疏散通道净宽不小于 1.1 米、隔墙用不燃材料、每间设独立烟感、有可开启外窗、公共电箱不在住人房间内。缺项要求房东书面确认整改时间。</p></div>
+        </details>
+        <details>
+          <summary>房东要涨租，需要提前多久通知？</summary>
+          <div class="ans"><p>合同有约定按约定。10月26日汇总的 9 份样本中，4 份写明 60 日，3 份 30 日，2 份未约定。未约定时多数判例支持 30 日通知，且同一租期内不得单方提高已约定租金。通知用微信文字或书面，留痕。</p></div>
+        </details>
+        <details>
+          <summary>退租时墙面钉眼要赔多少？</summary>
+          <div class="ans"><p>按孔径与墙面材质分档。普通乳胶漆每孔 15—25 元，硅藻泥按整面计，膨胀螺丝孔另算。11月7日更新的对照表列出 6 套样本，最高单套补 420 元，含 2 套未扣款案例，原因是交房照片已记录同样孔位。</p></div>
+        </details>
+        <details>
+          <summary>商住两用房能注册公司吗？</summary>
+          <div class="ans"><p>先查土地用途和房屋用途。部分商住项目写明可注册，部分仅限办公但需业主同意书。注册前向市场监管部门确认地址是否被列入负面清单，再让房东出具产权证明复印件和同意书。合同里写清注册失败时押金如何处理。</p></div>
+        </details>
+        <details>
+          <summary>中介费一般由谁承担，能谈吗？</summary>
+          <div class="ans"><p>行业惯例是租客承担一个月租金的一部分，样本中 40%—100% 不等。能谈，尤其在房源挂牌超过 30 天时。谈的时候把「中介费」写进合同付款条款，注明支付方和金额，别只留口头。</p></div>
+        </details>
+      </div>
+    </section>
+
+    <!-- 用户评论 -->
+    <section class="block" id="reviews" aria-labelledby="h-reviews">
+      <div class="block-head">
+        <h2 id="h-reviews">用户评论：来自现场的声音</h2>
+        <span class="more">本周 23 条</span>
+      </div>
+      <div class="quotes">
+        <article class="quote-card">
+          <div class="qm" aria-hidden="true">“</div>
+          <p>照着 11月7日那张对照表数的钉眼，房东一开始报 9 个，我们一处处对，最后认了 5 个。差了 100 块，但过程清楚。</p>
+          <div class="who"><span class="av">周</span>周某 · 南苑小区 402 室租客 · 11月7日</div>
+        </article>
+        <article class="quote-card neg">
+          <div class="qm" aria-hidden="true">“</div>
+          <p>分摊表说空调单列，可我们那套只有一个总表，房东不肯装分表。表格好看，落地还得看电箱位置。</p>
+          <div class="who"><span class="av">李</span>李某 · 三室一厅合租 · 11月5日</div>
+        </article>
+        <article class="quote-card">
+          <div class="qm" aria-hidden="true">“</div>
+          <p>楼上漏水那次，物业 48 小时才来看。文章里写 15 个工作日走维修基金，我们等了 19 天，票据都还在。</p>
+          <div class="who"><span class="av">陈</span>陈某 · 3 号楼 501 室 · 11月3日</div>
+        </article>
+        <article class="quote-card">
+          <div class="qm" aria-hidden="true">“</div>
+          <p>涨租那条有点用。合同没写通知期，房东月初说下月涨 300。我截图问，他改口说提前一个月，最后涨了 150。</p>
+          <div class="who"><span class="av">吴</span>吴某 · 整租一居 · 10月29日</div>
+        </article>
+        <article class="quote-card neg">
+          <div class="qm" aria-hidden="true">“</div>
+          <p>隔断房消防那五项，我住的这间隔墙是石膏板，烟感只有一个在走廊。看完不敢续租了。</p>
+          <div class="who"><span class="av">赵</span>赵某 · 隔断房 · 10月31日</div>
+        </article>
+        <article class="quote-card">
+          <div class="qm" aria-hidden="true">“</div>
+          <p>商住注册那条提醒得对，房东口头说能注册，合同里一个字没写。去问市场监管，地址在负面清单上，白跑两趟。</p>
+          <div class="who"><span class="av">何</span>何某 · 商住公寓 · 10月27日</div>
+        </article>
+        <article class="quote-card">
+          <div class="qm" aria-hidden="true">“</div>
+          <p>合租冰箱谁清、垃圾谁倒，分摊表没管这些。最后是贴了张值日表，比讲道理管用。</p>
+          <div class="who"><span class="av">林</span>林某 · 三室合租 · 11月1日</div>
+        </article>
+        <article class="quote-card">
+          <div class="qm" aria-hidden="true">“</div>
+          <p>验房先拍照这条，我们上次就是先搬东西，被说地板划痕是搬的。这次学乖了，进门拍完再动。</p>
+          <div class="who"><span class="av">刘</span>刘某 · 38㎡ 一居 · 11月6日</div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 相关资讯 -->
+    <section class="block" id="news" aria-labelledby="h-news">
+      <div class="block-head">
+        <h2 id="h-news">相关资讯：近期租房动态</h2>
+        <span class="more">本地 · 政策 · 案例</span>
+      </div>
+      <div class="news-list">
+        <div class="news-item">
+          <time datetime="2026-11-07">11月7日</time>
+          <div class="ntxt">
+            <h3>南苑小区 3 号楼公共立管维修排期公布 <span class="src">物业公告</span></h3>
+            <p>11月2日物业书面回复：老化立管更换列入本月计划，走维修基金约 15 个工作日，期间漏水由楼上业主先行处理。501 室租客记录显示实际到场第 19 天。</p>
+          </div>
+        </div>
+        <div class="news-item">
+          <time datetime="2026-11-04">11月4日</time>
+          <div class="ntxt">
+            <h3>街道出租房消防抽查启动，重点查隔墙材料与逃生窗 <span class="src">街道通知</span></h3>
+            <p>本轮抽查覆盖 6 个社区，抽取 120 套出租房。现场比对隔墙燃烧等级、烟感数量与可开启外窗尺寸，不合格的下发整改通知并限期复查。</p>
+          </div>
+        </div>
+        <div class="news-item">
+          <time datetime="2026-10-31">10月31日</time>
+          <div class="ntxt">
+            <h3>两起短租纠纷调解结果：押金按维修票据结算 <span class="src">调解记录</span></h3>
+            <p>一起涉及沙发破损，维修票据 280 元，租客承担 200 元；另一起墙面发霉，判定为通风不足，双方各承担清洁费一半。调解均在一个月内完成。</p>
+          </div>
+        </div>
+        <div class="news-item">
+          <time datetime="2026-10-28">10月28日</time>
+          <div class="ntxt">
+            <h3>秋季租赁成交量环比回落，整租挂牌周期拉长 <span class="src">中介门店</span></h3>
+            <p>三家中介门店反馈：整租平均挂牌 21 天成交，比上月多 5 天；合租单间仍保持一周内的紧俏度。议价空间集中在月租 3000 元以上的整租房源。</p>
+          </div>
+        </div>
+        <div class="news-item">
+          <time datetime="2026-10-24">10月24日</time>
+          <div class="ntxt">
+            <h3>商住公寓注册地址负面清单更新，新增 3 条街区 <span class="src">市场监管</span></h3>
+            <p>新增街区主要涉及住宅改商用的历史遗留项目，清单内地址无法注册公司。签约前建议要求房东提供产权证明与用途批文复印件。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 红黑榜：对照面板 -->
+    <section class="block" id="rank" aria-labelledby="h-rank">
+      <div class="block-head">
+        <h2 id="h-rank">红黑榜：合同条款对照</h2>
+        <span class="more">样本 11 份</span>
+      </div>
+      <p class="lead">同一件事，合同里写法和没写法差别很大。左右两栏都来自实际样本，改一改就能用。</p>
+      <div class="rank-panel">
+        <div class="rank-col">
+          <h3><span class="pin" aria-hidden="true"></span>值得抄进合同的五条</h3>
+          <ol>
+            <li><span class="no">01</span><span><b>押金退还起算日</b>：交回钥匙并结清水电气之日起 7 个工作日内。</span></li>
+            <li><span class="no">02</span><span><b>自然损耗清单</b>：写明床垫使用满 3 年不因凹陷扣款，墙面轻微发黄不扣。</span></li>
+            <li><span class="no">03</span><span><b>维修响应时限</b>：水管、电路 24 小时内到场，其他 72 小时内，逾期租客可自行维修凭票抵扣。</span></li>
+            <li><span class="no">04</span><span><b>涨租通知期</b>：提前 60 日书面通知，同一租期内不调价。</span></li>
+            <li><span class="no">05</span><span><b>扣款价目表</b>：钉眼、打胶、补漆单价作为附件，双方签字。</span></li>
+          </ol>
+        </div>
+        <div class="rank-col bad">
+          <h3><span class="pin" aria-hidden="true"></span>容易踩坑的五种写法</h3>
+          <ol>
+            <li><span class="no">01</span><span><b>「房屋完好后退还」</b>：没有基线照片，完好与否全凭一方判断。</span></li>
+            <li><span class="no">02</span><span><b>「水电按实际分摊」</b>：不写计量方式，总表一套房时无法核算。</span></li>
+            <li><span class="no">03</span><span><b>「设施损坏照价赔偿」</b>：无价目表，赔偿金额随口报。</span></li>
+            <li><span class="no">04</span><span><b>「可提前解约」</b>：不写违约金比例和通知期，解约成本不确定。</span></li>
+            <li><span class="no">05</span><span><b>「注册事宜另行协商」</b>：商住签约时这句话等于没承诺。</span></li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- 相关推荐：标签 -->
+    <section class="block" id="rec" aria-labelledby="h-rec">
+      <div class="block-head">
+        <h2 id="h-rec">相关推荐：继续看这些</h2>
+      </div>
+      <div class="recwrap">
+        <a class="rec" href="/#deep">退租墙面钉眼修补价目</a>
+        <a class="rec" href="/#deep">合租房空调电费单列计量</a>
+        <a class="rec" href="/#news">公共立管漏水谁垫钱</a>
+        <a class="rec" href="/#guide">退租当天拍照顺序</a>
+        <a class="rec" href="/#faq">押金退还起算日怎么写</a>
+        <a class="rec" href="/#faq">涨租提前通知期判例</a>
+        <a class="rec" href="/#channels">隔断房逃生窗尺寸</a>
+        <a class="rec" href="/#rank">合同补充条款模板</a>
+        <a class="rec" href="/#channels">商住两用注册负面清单</a>
+        <a class="rec" href="/#reviews">租客验房实录</a>
+      </div>
+    </section>
+
+    <!-- 创作者证言 -->
+    <section class="block" id="voice" aria-labelledby="h-voice">
+      <div class="voice">
+        <div class="vtag">房东侧记录 · 2026</div>
+        <blockquote>「押金不是罚金，是履约的抵押。把价目表贴在合同后面，退租那天吵架的次数少了一半。」</blockquote>
+        <div class="vby"><b>徐女士</b> · 六层民房房东 · 自 2016 年起出租，现管理 14 间</div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 侧栏 -->
+  <aside class="side-col" aria-label="侧栏导航与速览">
+    <div class="side-card">
+      <h3>本页栏目</h3>
+      <ul class="side-nav" id="sideNav">
+        <li><a href="/#overview">领域概览</a></li>
+        <li><a href="/#featured">精选推荐</a></li>
+        <li><a href="/#latest">最新更新</a></li>
+        <li><a href="/#channels">分类入口</a></li>
+        <li><a href="/#deep">深度解析</a></li>
+        <li><a href="/#guide">体验指南</a></li>
+        <li><a href="/#faq">常见问答</a></li>
+        <li><a href="/#reviews">用户评论</a></li>
+        <li><a href="/#news">相关资讯</a></li>
+        <li><a href="/#rank">红黑榜</a></li>
+        <li><a href="/#rec">相关推荐</a></li>
+      </ul>
+    </div>
+    <div class="side-card">
+      <h3>本周现场速记</h3>
+      <ul class="side-mini">
+        <li><b>38㎡ 一居验房</b>6 套，平均 41 分钟，最高补 420 元。<div class="sm-time">11月7日</div></li>
+        <li><b>合租分摊测算</b>三室 3 人月差 58 元，两人差 96 元。<div class="sm-time">11月5日</div></li>
+        <li><b>漏水工单跟踪</b>物业 48 小时到场，维修第 19 天完成。<div class="sm-time">11月3日</div></li>
+        <li><b>消防抽查</b>6 个社区、120 套房，重点查隔墙。<div class="sm-time">11月4日</div></li>
+      </ul>
+    </div>
+    <div class="side-card">
+      <h3>签约前必带</h3>
+      <div class="side-tip">手机（带时间戳）、卷尺、手电、纸巾、笔。<br>进门先环拍，再动任何东西。水表表盘擦一下再拍，连同表号入镜。</div>
+    </div>
+  </aside>
+</div>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <div class="fb-name">
+          <svg viewBox="0 0 64 64" aria-hidden="true">
+            <rect width="64" height="64" rx="14" fill="#25566d"/>
+            <path d="M12 34 32 16l20 18v16H12z" fill="none" stroke="#e9b872" stroke-width="4" stroke-linejoin="round"/>
+            <rect x="26" y="38" width="12" height="12" fill="#e9b872"/>
+          </svg>
+          海角大神房东姐姐
+        </div>
+        <p>把押金、维修、水电三本账摆到桌面上，让租房双方照同一份清单说话。</p>
+      </div>
+      <div class="foot-col">
+        <h4>问题频道</h4>
+        <ul>
+          <li><a href="/#deep">押金退还纠纷</a></li>
+          <li><a href="/#guide">退租验房清单</a></li>
+          <li><a href="/#deep">合租房水电分摊</a></li>
+          <li><a href="/#news">楼上漏水责任划分</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>合同与规则</h4>
+        <ul>
+          <li><a href="/#rank">合同补充条款模板</a></li>
+          <li><a href="/#faq">涨租提前通知期</a></li>
+          <li><a href="/#channels">隔断房消防要求</a></li>
+          <li><a href="/#faq">商住两用注册</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>现场记录</h4>
+        <ul>
+          <li><a href="/#latest">本周更新</a></li>
+          <li><a href="/#reviews">租客评论</a></li>
+          <li><a href="/#voice">房东侧记录</a></li>
+          <li><a href="/#rec">相关推荐</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <div class="note">页面内案例、租客与房东姓名、面积、金额均为示范数据，用于说明核对方法；实际签约请以产权证明、合同原文与当地主管部门规定为准。更新时间：2026-11-08，对应正文「最新更新」中 11月7日验房对照表 v3.2 与 11月5日分摊表两项。</div>
+      <div>© 2026 海角大神房东姐姐 · 内容示例</div>
+    </div>
+  </div>
+</footer>
+
+<button class="totop" id="toTop" type="button" aria-label="回到页面顶部">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg>
+</button>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- 移动端菜单 ---------- */
+  var toggle = document.getElementById('menuToggle');
+  var mobileNav = document.getElementById('mobileNav');
+  if(toggle && mobileNav){
+    toggle.addEventListener('click', function(){
+      var open = mobileNav.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      toggle.setAttribute('aria-label', open ? '收起导航菜单' : '打开导航菜单');
+    });
+    mobileNav.addEventListener('click', function(e){
+      if(e.target.tagName === 'A'){
+        mobileNav.classList.remove('open');
+        toggle.setAttribute('aria-expanded','false');
+        toggle.setAttribute('aria-label','打开导航菜单');
+      }
+    });
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape' && mobileNav.classList.contains('open')){
+        mobileNav.classList.remove('open');
+        toggle.setAttribute('aria-expanded','false');
+        toggle.focus();
+      }
+    });
+  }
+
+  /* ---------- 返回顶部 ---------- */
+  var toTop = document.getElementById('toTop');
+  function onScroll(){
+    if(window.scrollY > 520){ toTop.classList.add('show'); }
+    else{ toTop.classList.remove('show'); }
+    highlight();
+  }
+  if(toTop){
+    toTop.addEventListener('click', function(){
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive:true });
+  onScroll();
+
+  /* ---------- 侧栏滚动高亮 ---------- */
+  var sideLinks = Array.prototype.slice.call(document.querySelectorAll('#sideNav a'));
+  var sections = sideLinks.map(function(a){
+    return document.getElementById(a.getAttribute('href').replace('/#',''));
+  });
+  function highlight(){
+    var pos = window.scrollY + 150;
+    var current = -1;
+    for(var i=0;i<sections.length;i++){
+      if(sections[i] && sections[i].offsetTop <= pos){ current = i; }
+    }
+    sideLinks.forEach(function(a,idx){
+      a.classList.toggle('on', idx === current);
+    });
+  }
+
+  /* ---------- 本地搜索 ---------- */
+  var input = document.getElementById('siteSearch');
+  var feedback = document.getElementById('searchFeedback');
+  var searchIndex = [
+    { t:'退租验房清单', id:'guide', kw:['退租','验房','清单','拍照','钉眼','打胶'] },
+    { t:'押金退还条款与起算日', id:'deep', kw:['押金','退还','条款','起算','扣款'] },
+    { t:'合租房水电分摊表', id:'deep', kw:['合租','水电','分摊','电费','空调'] },
+    { t:'楼上漏水责任划分', id:'news', kw:['漏水','楼上','物业','立管','维修基金'] },
+    { t:'涨租提前通知期', id:'faq', kw:['涨租','通知期','价格','租金'] },
+    { t:'隔断房消防要求', id:'channels', kw:['隔断','消防','烟感','逃生窗','隔墙'] },
+    { t:'商住两用注册', id:'faq', kw:['商住','注册','公司','负面清单'] },
+    { t:'合同条款红黑榜', id:'rank', kw:['合同','条款','模板','补充'] },
+    { t:'用户评论实录', id:'reviews', kw:['评论','租客','反馈','实录'] },
+    { t:'本周最新更新', id:'latest', kw:['更新','本周','时间线','记录'] }
+  ];
+  function runSearch(){
+    var q = (input.value || '').trim().toLowerCase();
+    if(!q){
+      feedback.classList.remove('show');
+      feedback.textContent = '';
+      return;
+    }
+    var hits = searchIndex.filter(function(item){
+      if(item.t.toLowerCase().indexOf(q) > -1) return true;
+      return item.kw.some(function(k){ return k.indexOf(q) > -1 || q.indexOf(k) > -1; });
+    }).slice(0,5);
+    if(hits.length === 0){
+      feedback.classList.add('show');
+      feedback.innerHTML = '未找到「' + q.replace(/[<>&]/g,'') + '」相关内容。试试「押金」「验房」「漏水」「涨租」。';
+    }else{
+      feedback.classList.add('show');
+      feedback.innerHTML = hits.map(function(h){
+        return '<a href="/#' + h.id + '" style="display:block;padding:5px 0;color:#1b3a4b">' + h.t + '</a>';
+      }).join('');
+    }
+  }
+  if(input && feedback){
+    input.addEventListener('input', runSearch);
+    input.addEventListener('keydown', function(e){
+      if(e.key === 'Enter'){
+        e.preventDefault();
+        var first = feedback.querySelector('a');
+        if(first){ window.location.hash = first.getAttribute('href'); feedback.classList.remove('show'); }
+      }
+    });
+    document.addEventListener('click', function(e){
+      if(!feedback.contains(e.target) && e.target !== input){
+        feedback.classList.remove('show');
+      }
+    });
+  }
+})();
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "海角大神房东姐姐",
+  "url": "https://example.com/",
+  "inLanguage": "zh-CN",
+  "description": "记录房东与租客在押金、维修、水电分摊上的实际操作，提供退租验房清单与合同条款对照。"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "押金一般多久退回才合理？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "看合同怎么写。样本里 6 份约定 7 个工作日内，2 份 15 日，3 份写验房后即时。没写的，按民法典关于租赁合同的一般规则主张合理期限，通常以水电燃气结清、钥匙交回为起算点。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "合租房水电按人头分还是按面积分？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "按人头更常见，三室一厅 3 人样本里 8 份合同采用此方式。差异出现在空调：两台空调供三个房间时，按人头分会让不使用空调的租客多付钱。把空调与热水器单列计量，公共照明和宽带按人头，月差可收窄到 20 元以内。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "楼上漏水，我该找房东还是找楼上业主？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "先找房东，因为租赁合同下房东负有交付可用房屋的义务。房东再向楼上业主或物业追偿。公共立管老化归物业维修基金，室内部分归楼上业主，租客没有垫付义务。所有沟通留文字记录，维修票据拍照。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "房东要涨租，需要提前多久通知？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "合同有约定按约定。汇总的 9 份样本中，4 份写明 60 日，3 份 30 日，2 份未约定。未约定时多数判例支持 30 日通知，且同一租期内不得单方提高已约定租金。通知用微信文字或书面，留痕。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "退租时墙面钉眼要赔多少？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "按孔径与墙面材质分档。普通乳胶漆每孔 15—25 元，硅藻泥按整面计，膨胀螺丝孔另算。对照表列出 6 套样本，最高单套补 420 元，含 2 套未扣款案例，原因是交房照片已记录同样孔位。"
+      }
+    }
+  ]
+}
+</script>
+</body>
+  </html>
